@@ -1,384 +1,932 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALLCON - Standard Commercial Stock Size Matrix</title>
-  
-  <!-- WAREHOUSE / MATRIX FAVICON -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e53935'><path d='M4 3h16c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm0 4v3h16V7H4zm0 5v3h16v-3H4zm0 5v2h16v-2H4z'/></svg>">
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#0d0f12',
-            cardBg: '#14181d',
-            cardBorder: '#232931',
-            allconRed: '#e53935',
-            allconRedHover: '#f44336'
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macsteel Technical Reference Hub</title>
+    <style>
+        :root {
+            --primary-blue: #004b87;
+            --accent-blue: #0072ce;
+            --dark-navy: #002845;
+            --light-bg: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --hover-blue: #e8f4fc;
         }
-      }
-    }
-  </script>
-  <style>
-    body {
-      background-color: #0d0f12;
-      color: #f0f3f6;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
 
-    input, select {
-      background-color: #090a0c !important;
-      color: #ffffff !important;
-      border-color: #232931 !important;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-    input:focus, select:focus {
-      outline: none;
-      border-color: #e53935 !important;
-      box-shadow: 0 0 0 1px #e53935;
-    }
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    .matrix-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
+        header {
+            background-color: var(--dark-navy);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .matrix-table th {
-      background-color: #181d24;
-      color: #e53935;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 10px 12px;
-      border-bottom: 2px solid #232931;
-      text-align: left;
-    }
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
 
-    .matrix-table td {
-      padding: 10px 12px;
-      border-bottom: 1px solid #232931;
-      color: #f0f3f6;
-    }
+        .brand-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .matrix-table tr:hover td {
-      background-color: #1a2027;
-    }
+        .brand-title span {
+            color: var(--accent-blue);
+        }
 
-    .badge-std {
-      background-color: rgba(56, 142, 60, 0.2);
-      color: #81c784;
-      border: 1px solid #388e3c;
-      font-weight: 800;
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      text-transform: uppercase;
-    }
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            max-width: 500px;
+        }
 
-    .badge-special {
-      background-color: rgba(245, 124, 0, 0.2);
-      color: #ffb74d;
-      border: 1px solid #f57c00;
-      font-weight: 800;
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      text-transform: uppercase;
-    }
-  </style>
+        .search-input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border-radius: 20px;
+            border: 1px solid transparent;
+            outline: none;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 8px rgba(0, 114, 206, 0.4);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .main-nav {
+            background-color: var(--primary-blue);
+            padding: 0 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 1rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn.active {
+            color: white;
+            border-bottom-color: var(--accent-blue);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        main {
+            flex-grow: 1;
+            max-width: 1400px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .controls-panel {
+            background: var(--card-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .filter-select {
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .data-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-header {
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.88rem;
+        }
+
+        th {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 0.6rem 0.8rem;
+            border-bottom: 2px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background-color: var(--hover-blue);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .calc-box {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .calc-box h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .calc-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: var(--hover-blue);
+            border-radius: 4px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .calc-result div {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2em 0.6em;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 3px;
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .tag-blue { background-color: #cce5ff; color: #004085; }
+        .tag-green { background-color: #d4edda; color: #155724; }
+        .tag-yellow { background-color: #fff3cd; color: #856404; }
+        .tag-red { background-color: #f8d7da; color: #721c24; }
+
+        footer {
+            background-color: var(--dark-navy);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+            font-size: 0.85rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-card {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        .contact-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-card p {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body>
 
-  <!-- HEADER -->
-  <header class="bg-[#14181d] border-b-2 border-allconRed px-6 py-4 shadow-lg">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-      <div class="flex items-center gap-4">
-        <a href="https://allconafrica.github.io/allcondashboard/" class="flex items-center gap-3 hover:opacity-90 transition">
-          <img src="./ALLCON-Logo.jpg" alt="ALLCON Logo" class="h-10 w-auto rounded object-contain" onerror="this.onerror=null; this.outerHTML='<div class=\'bg-allconRed text-white font-black px-3 py-1 rounded text-xl tracking-wider\'>ALLCON</div>';">
-        </a>
-        <div>
-          <h1 class="text-xl font-black text-white tracking-tight flex items-center gap-2">
-            Standard Commercial Stock Size Matrix
-          </h1>
-          <p class="text-xs text-zinc-400">Comprehensive Mill Availability & Pipe Schedule Lookup</p>
+    <header>
+        <div class="header-container">
+            <div class="brand-title">
+                MACSTEEL <span>TECHNICAL HUB</span>
+            </div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="globalSearch" class="search-input" placeholder="Search grades, dimensions, properties, standards...">
+            </div>
         </div>
-      </div>
+    </header>
 
-      <div class="flex items-center gap-3">
-        <a href="https://allconafrica.github.io/allcondashboard/" class="bg-[#1f2630] hover:bg-allconRed text-white text-xs font-bold px-4 py-2.5 rounded-lg border border-cardBorder transition flex items-center gap-2">
-          <i class="fa-solid fa-house text-xs"></i> Back to Dashboard
-        </a>
-      </div>
-    </div>
-  </header>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <button class="tab-btn active" onclick="switchTab('vrn-steels')">VRN Wear & Structural</button>
+            <button class="tab-btn" onclick="switchTab('special-steels')">Special Steels (Carbon & Alloy)</button>
+            <button class="tab-btn" onclick="switchTab('stainless')">Stainless Steel</button>
+            <button class="tab-btn" onclick="switchTab('aluminium')">Aluminium</button>
+            <button class="tab-btn" onclick="switchTab('calculators')">Weight & Process Calculators</button>
+            <button class="tab-btn" onclick="switchTab('branches')">Branch Directory</button>
+        </div>
+    </nav>
 
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full space-y-6">
+    <main>
+        <!-- VRN WEAR & STRUCTURAL TAB -->
+        <div id="vrn-steels" class="tab-content active">
+            <div class="controls-panel">
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <select class="filter-select" id="vrn-category-filter" onchange="filterVRN()">
+                        <option value="all">All VRN Categories</option>
+                        <option value="wear">Hardwearing / Wear Plate</option>
+                        <option value="structural">High Yield / Structural</option>
+                        <option value="boiler">Boiler & Pressure Vessel</option>
+                    </select>
+                </div>
+            </div>
 
-    <!-- CONTROLS, SEARCH & THICKNESS FILTER BAR -->
-    <div class="bg-cardBg border border-cardBorder p-4 rounded-xl shadow-xl space-y-4">
-      
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-        <!-- SEARCH INPUT -->
-        <div class="md:col-span-7 relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-zinc-500 text-xs"></i>
-          <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Search dimensions or schedules (e.g. 120x120, Sched 40, 88.9 OD, 150x150, 8mm)..." class="w-full pl-9 pr-4 py-2 rounded-lg text-xs font-semibold">
+            <div class="data-card vrn-card" data-category="wear">
+                <div class="card-header">
+                    <div>
+                        <span class="card-title">VRN 400 / VRN 450 / VRN 500</span>
+                        <span class="card-subtitle">Conventional Low Alloy Martensitic Steels</span>
+                    </div>
+                    <span class="tag tag-blue">Quenched & Tempered</span>
+                </div>
+                <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Quenched and tempered steel grades engineered for extreme resistance to wear, impact, and sliding abrasion[cite: 50, 52]. Nominal hardnesses of 400, 450, and 500 HB[cite: 50, 52].</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Nominal Hardness (HB)</th>
+                                <th>Yield (MPa)</th>
+                                <th>Tensile (MPa)</th>
+                                <th>Min Elong. (%)</th>
+                                <th>Welding Electrodes</th>
+                                <th>Max Temp (°C)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>VRN 400</strong></td>
+                                <td>360 - 420[cite: 52]</td>
+                                <td>800[cite: 50, 52]</td>
+                                <td>1200[cite: 50, 52]</td>
+                                <td>12%[cite: 50, 52]</td>
+                                <td>E7015, E7018, ER70S-6[cite: 50, 57]</td>
+                                <td>250°C[cite: 50, 52]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>VRN 450</strong></td>
+                                <td>420 - 480[cite: 52]</td>
+                                <td>950[cite: 50, 52]</td>
+                                <td>1400[cite: 50, 52]</td>
+                                <td>11%[cite: 50, 52]</td>
+                                <td>E7015, E7018, ER70S-6[cite: 50, 57]</td>
+                                <td>250°C[cite: 50, 52]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>VRN 500</strong></td>
+                                <td>470 - 530[cite: 52]</td>
+                                <td>1100[cite: 50, 52]</td>
+                                <td>1600[cite: 50, 52]</td>
+                                <td>9%[cite: 50, 52]</td>
+                                <td>E7015, E7018, ER70S-6[cite: 50, 57]</td>
+                                <td>250°C[cite: 50, 52]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="data-card vrn-card" data-category="wear">
+                <div class="card-header">
+                    <div>
+                        <span class="card-title">Creusabro 8000 & VRN 600</span>
+                        <span class="card-subtitle">Specialized & Overlay Wear Plates</span>
+                    </div>
+                    <span class="tag tag-red">Extreme Wear</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Material Type</th>
+                                <th>Hardness</th>
+                                <th>Key Features / Applications</th>
+                                <th>Max Service Temp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Creusabro 8000</strong></td>
+                                <td>High-Performance TRIP Steel[cite: 53]</td>
+                                <td>430-550 HB (Work hardens +70BHN)[cite: 51, 53]</td>
+                                <td>50% superior life over standard 500HB[cite: 51, 53]. Micro-carbide additions[cite: 53]. Quarries, mining chutes[cite: 53].</td>
+                                <td>450°C[cite: 50]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>VRN 600</strong></td>
+                                <td>Iron Chromium Carbide Overlay[cite: 50, 54]</td>
+                                <td>550 HB min (Overlay)[cite: 54]</td>
+                                <td>Fused onto mild steel backing plate[cite: 54]. Optimum sliding abrasion resistance[cite: 54]. Fan blades, hoppers[cite: 54].</td>
+                                <td>600°C[cite: 50, 54]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>VRN 200</strong></td>
+                                <td>As-Rolled High Carbon (Bennox/SS10 eq.)[cite: 10]</td>
+                                <td>+200 HB[cite: 50, 10]</td>
+                                <td>Low cost wear liner plates, scraper blades[cite: 10]. Fitted by drilling/bolting[cite: 10].</td>
+                                <td>250°C[cite: 50, 10]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="data-card vrn-card" data-category="structural">
+                <div class="card-header">
+                    <div>
+                        <span class="card-title">Structural Steels (S275, S355, S690QL, S700MC)</span>
+                        <span class="card-subtitle">High Yield & Standard Structural Plates</span>
+                    </div>
+                    <span class="tag tag-green">Structural</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Standard</th>
+                                <th>Yield Strength (MPa)</th>
+                                <th>Tensile Strength (MPa)</th>
+                                <th>Charpy Impact Energy</th>
+                                <th>Equivalents</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>S275JR</strong></td>
+                                <td>EN 10025-2[cite: 59]</td>
+                                <td>275 min[cite: 59]</td>
+                                <td>410 - 560[cite: 59]</td>
+                                <td>27 J @ 20°C[cite: 59]</td>
+                                <td>BS 4360 43B, SANS 1431 300WB[cite: 59]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>S355J2+N</strong></td>
+                                <td>EN 10025-2[cite: 50, 59]</td>
+                                <td>355 min[cite: 50, 59]</td>
+                                <td>470 - 630[cite: 50, 59]</td>
+                                <td>27 J @ -20°C[cite: 50, 59]</td>
+                                <td>BS GR50D, SANS 350WDD, ST52-3[cite: 50, 59]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>S690QL</strong></td>
+                                <td>EN 10025-6[cite: 60]</td>
+                                <td>690 min[cite: 50, 60]</td>
+                                <td>770 - 940[cite: 60]</td>
+                                <td>30 J @ -40°C[cite: 60]</td>
+                                <td>Bisalloy 80, ASTM A514, AM 700[cite: 50, 60]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>S700MC</strong></td>
+                                <td>EN 10149-2[cite: 61]</td>
+                                <td>700 min[cite: 50, 61]</td>
+                                <td>750 - 950[cite: 50, 61]</td>
+                                <td>28 J @ -40°C[cite: 61]</td>
+                                <td>Thermo-mechanically rolled cold-forming steel[cite: 50, 61]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="data-card vrn-card" data-category="boiler">
+                <div class="card-header">
+                    <div>
+                        <span class="card-title">Boiler & Pressure Vessel Steels</span>
+                        <span class="card-subtitle">A516 Gr 70, P265GH, P295GH, P355GH, BS 1501</span>
+                    </div>
+                    <span class="tag tag-yellow">Pressure Vessel</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Specification</th>
+                                <th>Yield (MPa)</th>
+                                <th>Tensile (MPa)</th>
+                                <th>Impact Spec</th>
+                                <th>Equivalents</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>A516 Grade 70</strong></td>
+                                <td>ASTM A516[cite: 63]</td>
+                                <td>260 min[cite: 50, 63]</td>
+                                <td>480 - 620[cite: 63]</td>
+                                <td>20J min @ -46°C to -35°C[cite: 63]</td>
+                                <td>P295GH, BS 1501-224-490[cite: 63]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>P265GH</strong></td>
+                                <td>EN 10028-2[cite: 64]</td>
+                                <td>265 min[cite: 64]</td>
+                                <td>410 - 530[cite: 64]</td>
+                                <td>27 J @ -20°C[cite: 64]</td>
+                                <td>A516 Gr 60, BS 1501-161-430A[cite: 62, 64]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>P295GH</strong></td>
+                                <td>EN 10028-2[cite: 64]</td>
+                                <td>295 min[cite: 64]</td>
+                                <td>460 - 580[cite: 64]</td>
+                                <td>27 J @ -20°C[cite: 64]</td>
+                                <td>A516 Gr 65/70[cite: 64]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>P355GH</strong></td>
+                                <td>EN 10028-2[cite: 64]</td>
+                                <td>355 min[cite: 64]</td>
+                                <td>510 - 650[cite: 64]</td>
+                                <td>27 J @ -20°C[cite: 64]</td>
+                                <td>BS 1501-224-490[cite: 64]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <!-- THICKNESS / GAUGE FILTER -->
-        <div class="md:col-span-5 flex items-center gap-2">
-          <label class="text-xs font-bold text-zinc-400 whitespace-nowrap uppercase">Wall / Thk Filter:</label>
-          <select id="thkFilter" onchange="filterData()" class="w-full p-2 rounded-lg text-xs font-bold">
-            <option value="ALL">All Wall Thicknesses</option>
-            <option value="2">2.0 mm - 3.0 mm</option>
-            <option value="4">3.2 mm - 5.0 mm</option>
-            <option value="6">6.0 mm</option>
-            <option value="8">8.0 mm</option>
-            <option value="10">10.0 mm / Sched 40</option>
-            <option value="12">12.0 mm +</option>
-          </select>
+        <!-- SPECIAL STEELS TAB -->
+        <div id="special-steels" class="tab-content">
+            <div class="controls-panel">
+                <div class="filter-group">
+                    <label>Steel Type:</label>
+                    <select class="filter-select" id="special-type-filter" onchange="filterSpecial()">
+                        <option value="all">All Special Steels</option>
+                        <option value="carbon">Carbon Steels (EN3A, EN8, EN9, EN14)</option>
+                        <option value="alloy">Alloy Steels (EN19, EN24, EN26, EN30B, EN36B)</option>
+                        <option value="bright">Bright Bar & Free-Cutting</option>
+                        <option value="hollow">Hollow Bar (St 52.0)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="data-card spec-card" data-type="carbon">
+                <div class="card-header">
+                    <div>
+                        <span class="card-title">Carbon Engineering Steels</span>
+                        <span class="card-subtitle">Black Bar & Forgings (BS 970 / BS 2772)</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Grade (BS Designation)</th>
+                                <th>Old Name</th>
+                                <th>Color Code</th>
+                                <th>Carbon %</th>
+                                <th>Normalized UTS (MPa)</th>
+                                <th>Typical Applications</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>070M20</strong>[cite: 97]</td>
+                                <td>EN 3A[cite: 97]</td>
+                                <td>BLACK[cite: 97]</td>
+                                <td>0.16 - 0.24%[cite: 97]</td>
+                                <td>430 min[cite: 97]</td>
+                                <td>Shafts, bolts, studs, couplings[cite: 97]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>080M40</strong>[cite: 98]</td>
+                                <td>EN 8[cite: 98]</td>
+                                <td>GREEN[cite: 98]</td>
+                                <td>0.36 - 0.44%[cite: 98]</td>
+                                <td>550 min[cite: 98]</td>
+                                <td>Crankshafts, connecting rods, driving rings[cite: 99]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>070M55</strong>[cite: 100]</td>
+                                <td>EN 9[cite: 100]</td>
+                                <td>YELLOW[cite: 100]</td>
+                                <td>0.50 - 0.60%[cite: 100]</td>
+                                <td>700 min[cite: 100]</td>
+                                <td>Sprockets, cylinders, cams, keys, small gears[cite: 101]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>150M19</strong>[cite: 102]</td>
+                                <td>EN 14B[cite: 102]</td>
+                                <td>WHITE/GREEN/RED[cite: 102]</td>
+                                <td>0.15 - 0.23%[cite: 102]</td>
+                                <td>540 min (H&T)[cite: 102]</td>
+                                <td>Mine lifting/winding equipment, motor shafts[cite: 102]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="data-card spec-card" data-type="alloy">
+                <div class="card-header">
+                    <div>
+                        <span class="card-title">High Tensile Alloy Steels</span>
+                        <span class="card-subtitle">Quenched & Tempered Bar Stock</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Old Name</th>
+                                <th>Color Code</th>
+                                <th>Composition Highlights</th>
+                                <th>UTS Range (MPa)</th>
+                                <th>Primary Uses</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>709M40</strong>[cite: 103]</td>
+                                <td>EN 19[cite: 103]</td>
+                                <td>BROWN / BLUE[cite: 103]</td>
+                                <td>1% Cr, 0.3% Mo[cite: 103]</td>
+                                <td>850 - 1000 (Cond T)[cite: 103]</td>
+                                <td>Axles, high tensile bolts, induction track pins[cite: 104]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>817M40</strong>[cite: 105]</td>
+                                <td>EN 24[cite: 105]</td>
+                                <td>RED / BLUE[cite: 105]</td>
+                                <td>1.5% Ni, 1.2% Cr, 0.25% Mo[cite: 105]</td>
+                                <td>850 - 1000 (Cond T)[cite: 105]</td>
+                                <td>Heavy duty connecting rods, gun barrels, gears[cite: 106]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>826M40</strong>[cite: 107]</td>
+                                <td>EN 26[cite: 107]</td>
+                                <td>BLACK / RED[cite: 107]</td>
+                                <td>2.5% Ni, 0.65% Cr, 0.55% Mo[cite: 107]</td>
+                                <td>1000 - 1150 (Cond V)[cite: 107]</td>
+                                <td>Winder parts, tie rods, heavy mine components[cite: 107]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>835M30</strong>[cite: 108]</td>
+                                <td>EN 30B[cite: 108]</td>
+                                <td>PINK[cite: 108]</td>
+                                <td>4.0% Ni, 1.25% Cr, 0.28% Mo[cite: 108]</td>
+                                <td>1550 min (Cond Z)[cite: 108]</td>
+                                <td>Aero engine connecting rods, heavy duty gears[cite: 108]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>655M13</strong>[cite: 109]</td>
+                                <td>EN 36B[cite: 109]</td>
+                                <td>BLUE[cite: 109]</td>
+                                <td>3.25% Ni, 0.85% Cr (Case Hardening)[cite: 109]</td>
+                                <td>1000 min (Hardened)[cite: 109]</td>
+                                <td>Gears, steering worms, chuck jaws, track pins[cite: 109]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="data-card spec-card" data-type="bright">
+                <div class="card-header">
+                    <div>
+                        <span class="card-title">Bright Bar & Free-Cutting Steels</span>
+                        <span class="card-subtitle">Cold Drawn, Peeled & Ground Bars</span>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Standard</th>
+                                <th>Color Code</th>
+                                <th>Characteristics</th>
+                                <th>UTS (MPa)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>SAE 1018</strong>[cite: 123]</td>
+                                <td>SAE J 403[cite: 123]</td>
+                                <td>RED[cite: 123]</td>
+                                <td>Low carbon bright mild steel, excellent ductility[cite: 123]</td>
+                                <td>560 - 620[cite: 123]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>080A42</strong>[cite: 124]</td>
+                                <td>EN 8D[cite: 124]</td>
+                                <td>YELLOW[cite: 124]</td>
+                                <td>Medium carbon bright bar for high strength shafts[cite: 124]</td>
+                                <td>730 - 740[cite: 124]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>230M07</strong>[cite: 122]</td>
+                                <td>EN 1A[cite: 122]</td>
+                                <td>BLUE[cite: 122]</td>
+                                <td>High sulfur free-cutting steel for rapid machining[cite: 122]</td>
+                                <td>460 - 550[cite: 122]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SAE 12L14</strong>[cite: 123]</td>
+                                <td>SAE J 403[cite: 123]</td>
+                                <td>MAGENTA[cite: 123]</td>
+                                <td>Leaded free-cutting steel for maximum tool life[cite: 123]</td>
+                                <td>High-speed repetition[cite: 123]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="data-card spec-card" data-type="hollow">
+                <div class="card-header">
+                    <div>
+                        <span class="card-title">St 52.0 Hollow Bar</span>
+                        <span class="card-subtitle">Seamless Mechanical Machining Tubing (DIN 1629)</span>
+                    </div>
+                    <span class="tag tag-yellow">Color Code: ORANGE</span>[cite: 114]
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0.8rem;">Low carbon alloy steel (Mat. No. 1.0421)[cite: 114]. Yield strength 335 - 355 MPa min depending on wall thickness[cite: 114]. Ideal for bush manufacture, hydraulic cylinders, and flanges[cite: 114].</p>
+            </div>
         </div>
-      </div>
 
-      <!-- CATEGORY TABS -->
-      <div class="flex flex-wrap gap-1.5 bg-[#090a0c] p-1.5 rounded-lg border border-cardBorder">
-        <button onclick="setCategory('ALL', this)" class="cat-btn active px-3 py-1.5 rounded text-xs font-bold bg-allconRed text-white">All Sections</button>
-        <button onclick="setCategory('Pipe', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Pipes (NB & Sched)</button>
-        <button onclick="setCategory('Angle', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Equal & Unequal Angle</button>
-        <button onclick="setCategory('Tubing', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Square / Rect Tubing</button>
-        <button onclick="setCategory('Channel', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Channels (PFC)</button>
-        <button onclick="setCategory('Beam', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Beams (IPE/UB/UC)</button>
-        <button onclick="setCategory('Plate', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Plates</button>
-        <button onclick="setCategory('Bar', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Bars & Rods</button>
-      </div>
+        <!-- STAINLESS STEEL TAB -->
+        <div id="stainless" class="tab-content">
+            <div class="data-card">
+                <div class="card-header">
+                    <span class="card-title">Stainless Steel Specification Matrix</span>
+                    <span class="card-subtitle">Austenitic, Ferritic, Utility & Duplex Grades</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Class</th>
+                                <th>EN / UNS Spec</th>
+                                <th>Key Characteristics</th>
+                                <th>Welding Consumable</th>
+                                <th>Max Service Temp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>304 / 304L</strong></td>
+                                <td>Austenitic[cite: 67, 69]</td>
+                                <td>1.4301 / 1.4307[cite: 67, 69]</td>
+                                <td>Most versatile; food, beverage, general chemical[cite: 67, 69].</td>
+                                <td>308L[cite: 66, 69]</td>
+                                <td>830°C (Cont.)[cite: 69]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>316 / 316L</strong></td>
+                                <td>Austenitic[cite: 67, 70]</td>
+                                <td>1.4401 / 1.4404[cite: 67, 70]</td>
+                                <td>Mo added for pitting/crevice resistance in chlorides[cite: 67, 70].</td>
+                                <td>316L[cite: 66, 70]</td>
+                                <td>920°C (Cont.)[cite: 70]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>310 / 310S</strong></td>
+                                <td>Heat Resisting[cite: 67, 71]</td>
+                                <td>1.4845 / S31008[cite: 67, 71]</td>
+                                <td>High Cr/Ni for extreme scaling resistance[cite: 67, 71]. Furnace parts[cite: 67, 71].</td>
+                                <td>310S / 309[cite: 66]</td>
+                                <td>1200°C (Cont.)[cite: 71]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3CR12 / 3CR12L</strong></td>
+                                <td>Utility Ferritic[cite: 67, 72]</td>
+                                <td>1.4003 / S41003[cite: 67, 72]</td>
+                                <td>12% Cr utility steel[cite: 67]. Replaces mild steel in wet corrosion/abrasion[cite: 67, 72].</td>
+                                <td>309L[cite: 66, 72]</td>
+                                <td>600°C (Cont.)[cite: 72]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>430 / 430 DDQ</strong></td>
+                                <td>Standard Ferritic[cite: 67, 68]</td>
+                                <td>1.4016 / S43000[cite: 67, 68]</td>
+                                <td>Mildly corrosive; kitchenware, catering, automotive trim[cite: 67, 68].</td>
+                                <td>308L / 309L[cite: 66]</td>
+                                <td>730°C (Cont.)[cite: 68]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2205 Duplex</strong></td>
+                                <td>Standard Duplex[cite: 67, 73]</td>
+                                <td>1.4462 / S32205[cite: 67, 73]</td>
+                                <td>Double yield strength of austenitics[cite: 67, 73]. High SCC and pitting resistance[cite: 73].</td>
+                                <td>E2209[cite: 66, 73]</td>
+                                <td>300°C (Cont.)[cite: 73]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-    </div>
-
-    <!-- DATA TABLE CARD -->
-    <div class="bg-cardBg border border-cardBorder rounded-xl p-5 shadow-xl">
-      <div class="flex justify-between items-center mb-3 border-b border-cardBorder pb-3">
-        <h2 class="text-sm font-black text-allconRed uppercase tracking-wider flex items-center gap-2">
-          <i class="fa-solid fa-table-list"></i> Mill Stock Availability Matrix
-        </h2>
-        <span class="text-xs text-zinc-400 font-mono" id="rowCountLabel">0 Stock Items</span>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="matrix-table">
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Section / Profile Description</th>
-              <th>Dimensions / OD (mm)</th>
-              <th>Std Lengths (m)</th>
-              <th>Nominal Weight</th>
-              <th>Availability Status</th>
-            </tr>
-          </thead>
-          <tbody id="matrixTableBody">
-            <!-- Dynamic rows inserted here -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="bg-cardBg border-t border-cardBorder py-4 text-center text-xs text-zinc-500">
-    ALLCON Fabrication & Engineering &copy; 2026 | Technical Buyer Tools
-  </footer>
-
-  <script>
-    // Fully Comprehensive Commercial Mill Sizes & Pipe Schedule Matrix
-    const stockMatrix = [
-      // PIPES (NB & SCHEDULES - 15NB TO 600NB)
-      { category: 'Pipe', desc: '15 NB Pipe (21.3mm OD) - Sched 10', dims: '21.3 OD x 2.11 mm Wall', lengths: '6.0 m', weight: '1.00 kg/m', thk: 2.11, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '15 NB Pipe (21.3mm OD) - Sched 40 / STD', dims: '21.3 OD x 2.77 mm Wall', lengths: '6.0 m', weight: '1.27 kg/m', thk: 2.77, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '15 NB Pipe (21.3mm OD) - Sched 80 / XS', dims: '21.3 OD x 3.73 mm Wall', lengths: '6.0 m', weight: '1.62 kg/m', thk: 3.73, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '20 NB Pipe (26.7mm OD) - Sched 10', dims: '26.7 OD x 2.11 mm Wall', lengths: '6.0 m', weight: '1.28 kg/m', thk: 2.11, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '20 NB Pipe (26.7mm OD) - Sched 40 / STD', dims: '26.7 OD x 2.87 mm Wall', lengths: '6.0 m', weight: '1.69 kg/m', thk: 2.87, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '20 NB Pipe (26.7mm OD) - Sched 80 / XS', dims: '26.7 OD x 3.91 mm Wall', lengths: '6.0 m', weight: '2.20 kg/m', thk: 3.91, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '25 NB Pipe (33.4mm OD) - Sched 10', dims: '33.4 OD x 2.77 mm Wall', lengths: '6.0 m', weight: '2.09 kg/m', thk: 2.77, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '25 NB Pipe (33.4mm OD) - Sched 40 / STD', dims: '33.4 OD x 3.38 mm Wall', lengths: '6.0 m', weight: '2.50 kg/m', thk: 3.38, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '25 NB Pipe (33.4mm OD) - Sched 80 / XS', dims: '33.4 OD x 4.55 mm Wall', lengths: '6.0 m', weight: '3.24 kg/m', thk: 4.55, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '40 NB Pipe (48.3mm OD) - Sched 10', dims: '48.3 OD x 2.77 mm Wall', lengths: '6.0 m', weight: '3.11 kg/m', thk: 2.77, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '40 NB Pipe (48.3mm OD) - Sched 40 / STD', dims: '48.3 OD x 3.68 mm Wall', lengths: '6.0 m', weight: '4.05 kg/m', thk: 3.68, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '40 NB Pipe (48.3mm OD) - Sched 80 / XS', dims: '48.3 OD x 5.08 mm Wall', lengths: '6.0 m', weight: '5.41 kg/m', thk: 5.08, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '50 NB Pipe (60.3mm OD) - Sched 10', dims: '60.3 OD x 2.77 mm Wall', lengths: '6.0 m', weight: '3.93 kg/m', thk: 2.77, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '50 NB Pipe (60.3mm OD) - Sched 40 / STD', dims: '60.3 OD x 3.91 mm Wall', lengths: '6.0 m', weight: '5.44 kg/m', thk: 3.91, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '50 NB Pipe (60.3mm OD) - Sched 80 / XS', dims: '60.3 OD x 5.54 mm Wall', lengths: '6.0 m', weight: '7.48 kg/m', thk: 5.54, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '80 NB Pipe (88.9mm OD) - Sched 10', dims: '88.9 OD x 3.05 mm Wall', lengths: '6.0 m', weight: '6.55 kg/m', thk: 3.05, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '80 NB Pipe (88.9mm OD) - Sched 40 / STD', dims: '88.9 OD x 5.49 mm Wall', lengths: '6.0 m', weight: '11.29 kg/m', thk: 5.49, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '80 NB Pipe (88.9mm OD) - Sched 80 / XS', dims: '88.9 OD x 7.62 mm Wall', lengths: '6.0 m', weight: '15.27 kg/m', thk: 7.62, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '100 NB Pipe (114.3mm OD) - Sched 10', dims: '114.3 OD x 3.05 mm Wall', lengths: '6.0 m', weight: '8.49 kg/m', thk: 3.05, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '100 NB Pipe (114.3mm OD) - Sched 40 / STD', dims: '114.3 OD x 6.02 mm Wall', lengths: '6.0 m', weight: '16.07 kg/m', thk: 6.02, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '100 NB Pipe (114.3mm OD) - Sched 80 / XS', dims: '114.3 OD x 8.56 mm Wall', lengths: '6.0 m', weight: '22.32 kg/m', thk: 8.56, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '150 NB Pipe (168.3mm OD) - Sched 10', dims: '168.3 OD x 3.40 mm Wall', lengths: '6.0 m / 12.0 m', weight: '13.80 kg/m', thk: 3.40, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '150 NB Pipe (168.3mm OD) - Sched 40 / STD', dims: '168.3 OD x 7.11 mm Wall', lengths: '6.0 m / 12.0 m', weight: '28.26 kg/m', thk: 7.11, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '150 NB Pipe (168.3mm OD) - Sched 80 / XS', dims: '168.3 OD x 10.97 mm Wall', lengths: '6.0 m / 12.0 m', weight: '42.56 kg/m', thk: 10.97, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '200 NB Pipe (219.1mm OD) - Sched 10', dims: '219.1 OD x 3.76 mm Wall', lengths: '6.0 m / 12.0 m', weight: '19.96 kg/m', thk: 3.76, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '200 NB Pipe (219.1mm OD) - Sched 40 / STD', dims: '219.1 OD x 8.18 mm Wall', lengths: '6.0 m / 12.0 m', weight: '42.55 kg/m', thk: 8.18, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '200 NB Pipe (219.1mm OD) - Sched 80 / XS', dims: '219.1 OD x 12.70 mm Wall', lengths: '6.0 m / 12.0 m', weight: '64.64 kg/m', thk: 12.7, status: 'STD STOCK' },
-
-      { category: 'Pipe', desc: '250 NB Pipe (273.0mm OD) - Sched 10', dims: '273.0 OD x 4.19 mm Wall', lengths: '6.0 m / 12.0 m', weight: '27.78 kg/m', thk: 4.19, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '250 NB Pipe (273.0mm OD) - Sched 40 / STD', dims: '273.0 OD x 9.27 mm Wall', lengths: '6.0 m / 12.0 m', weight: '60.31 kg/m', thk: 9.27, status: 'STD STOCK' },
-      { category: 'Pipe', desc: '300 NB Pipe (323.9mm OD) - Sched 40 / STD', dims: '323.9 OD x 10.31 mm Wall', lengths: '6.0 m / 12.0 m', weight: '79.73 kg/m', thk: 10.31, status: 'STD STOCK' },
-
-      // EQUAL ANGLES (FULL INCREMENTS INC. 120x120x8)
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '25 x 25 x 3.0 mm', lengths: '6.0 m', weight: '1.12 kg/m', thk: 3, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '30 x 30 x 3.0 mm', lengths: '6.0 m', weight: '1.36 kg/m', thk: 3, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '40 x 40 x 3.0 mm', lengths: '6.0 m', weight: '1.83 kg/m', thk: 3, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '40 x 40 x 5.0 mm', lengths: '6.0 m / 9.0 m', weight: '2.97 kg/m', thk: 5, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '50 x 50 x 5.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m', weight: '3.77 kg/m', thk: 5, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '50 x 50 x 6.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m', weight: '4.47 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '60 x 60 x 6.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '5.42 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '70 x 70 x 6.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '6.38 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '80 x 80 x 8.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '9.63 kg/m', thk: 8, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '90 x 90 x 8.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '10.90 kg/m', thk: 8, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '100 x 100 x 8.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '12.20 kg/m', thk: 8, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '100 x 100 x 10.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '15.00 kg/m', thk: 10, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron (Labyrinth)', dims: '120 x 120 x 8.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '14.70 kg/m', thk: 8, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '120 x 120 x 10.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '18.20 kg/m', thk: 10, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '120 x 120 x 12.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '21.60 kg/m', thk: 12, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '150 x 150 x 10.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '23.00 kg/m', thk: 10, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '150 x 150 x 12.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '27.30 kg/m', thk: 12, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '200 x 200 x 16.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '48.50 kg/m', thk: 16, status: 'SPECIAL ORDER' },
-
-      // TUBING (SHS / RHS UP TO 300x300)
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '25 x 25 x 2.0 mm', lengths: '6.0 m', weight: '1.44 kg/m', thk: 2, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '38 x 38 x 2.0 mm', lengths: '6.0 m', weight: '2.26 kg/m', thk: 2, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '50 x 50 x 3.0 mm', lengths: '6.0 m', weight: '4.33 kg/m', thk: 3, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '76 x 76 x 3.0 mm', lengths: '6.0 m', weight: '6.78 kg/m', thk: 3, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '100 x 100 x 4.0 mm', lengths: '6.0 m / 12.0 m', weight: '11.80 kg/m', thk: 4, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '100 x 100 x 6.0 mm', lengths: '6.0 m / 12.0 m', weight: '17.10 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '120 x 120 x 5.0 mm', lengths: '6.0 m / 12.0 m', weight: '17.80 kg/m', thk: 5, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '150 x 150 x 6.0 mm', lengths: '6.0 m / 12.0 m', weight: '26.50 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '150 x 150 x 8.0 mm', lengths: '6.0 m / 12.0 m', weight: '34.50 kg/m', thk: 8, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '150 x 150 x 10.0 mm', lengths: '6.0 m / 12.0 m', weight: '42.30 kg/m', thk: 10, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '200 x 200 x 6.0 mm', lengths: '6.0 m / 12.0 m', weight: '35.90 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '200 x 200 x 10.0 mm', lengths: '6.0 m / 12.0 m', weight: '58.00 kg/m', thk: 10, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '250 x 250 x 10.0 mm', lengths: '6.0 m / 12.0 m', weight: '73.70 kg/m', thk: 10, status: 'SPECIAL ORDER' },
-      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '300 x 300 x 12.0 mm', lengths: '6.0 m / 12.0 m', weight: '107.00 kg/m', thk: 12, status: 'SPECIAL ORDER' },
-
-      // PARALLEL FLANGE CHANNELS (PFC)
-      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '100 x 50 mm', lengths: '6.0 m / 12.0 m', weight: '10.20 kg/m', thk: 5, status: 'STD STOCK' },
-      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '150 x 75 mm', lengths: '6.0 m / 12.0 m', weight: '17.90 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '180 x 70 mm', lengths: '6.0 m / 12.0 m', weight: '21.10 kg/m', thk: 7, status: 'STD STOCK' },
-      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '200 x 75 mm', lengths: '6.0 m / 12.0 m', weight: '23.40 kg/m', thk: 8, status: 'STD STOCK' },
-      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '230 x 90 mm', lengths: '6.0 m / 12.0 m', weight: '32.20 kg/m', thk: 8, status: 'STD STOCK' },
-      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '300 x 100 mm', lengths: '6.0 m / 12.0 m', weight: '45.40 kg/m', thk: 10, status: 'STD STOCK' },
-
-      // BEAMS & COLUMNS (IPE / UB / UC)
-      { category: 'Beam', desc: 'IPE AA Beam', dims: '100 x 55 mm', lengths: '6.0 m / 12.0 m', weight: '6.72 kg/m', thk: 4, status: 'STD STOCK' },
-      { category: 'Beam', desc: 'IPE Beam', dims: '140 x 73 mm', lengths: '6.0 m / 12.0 m', weight: '12.90 kg/m', thk: 5, status: 'STD STOCK' },
-      { category: 'Beam', desc: 'IPE Beam', dims: '160 x 82 mm', lengths: '6.0 m / 12.0 m', weight: '15.80 kg/m', thk: 5, status: 'STD STOCK' },
-      { category: 'Beam', desc: 'Universal Beam (UB)', dims: '203 x 133 x 25 kg/m', lengths: '9.0 m / 12.0 m / 13.0 m', weight: '25.10 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Beam', desc: 'Universal Beam (UB)', dims: '254 x 146 x 31 kg/m', lengths: '9.0 m / 12.0 m / 13.0 m', weight: '31.10 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Beam', desc: 'Universal Column (UC)', dims: '152 x 152 x 23 kg/m', lengths: '9.0 m / 12.0 m', weight: '23.00 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Beam', desc: 'Universal Column (UC)', dims: '203 x 203 x 46 kg/m', lengths: '9.0 m / 12.0 m', weight: '46.10 kg/m', thk: 8, status: 'STD STOCK' },
-
-      // PLATES
-      { category: 'Plate', desc: 'Mild Steel Commercial Plate', dims: '3.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '23.55 kg/m²', thk: 3, status: 'STD STOCK' },
-      { category: 'Plate', desc: 'Mild Steel Commercial Plate', dims: '4.5 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '35.33 kg/m²', thk: 4.5, status: 'STD STOCK' },
-      { category: 'Plate', desc: 'Mild Steel Commercial Plate', dims: '6.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '47.10 kg/m²', thk: 6, status: 'STD STOCK' },
-      { category: 'Plate', desc: 'Mild Steel Commercial Plate', dims: '8.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '62.80 kg/m²', thk: 8, status: 'STD STOCK' },
-      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '10.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '78.50 kg/m²', thk: 10, status: 'STD STOCK' },
-      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '12.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '94.20 kg/m²', thk: 12, status: 'STD STOCK' },
-      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '16.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '125.60 kg/m²', thk: 16, status: 'STD STOCK' },
-      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '20.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '157.00 kg/m²', thk: 20, status: 'STD STOCK' },
-
-      // BARS
-      { category: 'Bar', desc: 'Flat Bar', dims: '25 x 5.0 mm', lengths: '6.0 m', weight: '0.98 kg/m', thk: 5, status: 'STD STOCK' },
-      { category: 'Bar', desc: 'Flat Bar', dims: '50 x 6.0 mm', lengths: '6.0 m', weight: '2.36 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Bar', desc: 'Flat Bar', dims: '100 x 10.0 mm', lengths: '6.0 m', weight: '7.85 kg/m', thk: 10, status: 'STD STOCK' },
-      { category: 'Bar', desc: 'Round Bar', dims: '16 mm Dia', lengths: '6.0 m', weight: '1.58 kg/m', thk: 16, status: 'STD STOCK' },
-      { category: 'Bar', desc: 'Round Bar', dims: '20 mm Dia', lengths: '6.0 m', weight: '2.47 kg/m', thk: 20, status: 'STD STOCK' }
-    ];
-
-    let selectedCategory = 'ALL';
-
-    function setCategory(cat, btn) {
-      selectedCategory = cat;
-      document.querySelectorAll('.cat-btn').forEach(b => {
-        b.className = 'cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white';
-      });
-      btn.className = 'cat-btn active px-3 py-1.5 rounded text-xs font-bold bg-allconRed text-white';
-      filterData();
-    }
-
-    function filterData() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const thkVal = document.getElementById('thkFilter').value;
-      const body = document.getElementById('matrixTableBody');
-
-      const filtered = stockMatrix.filter(item => {
-        const matchesCat = selectedCategory === 'ALL' || item.category === selectedCategory;
-        const matchesQuery = item.desc.toLowerCase().includes(query) || 
-                             item.dims.toLowerCase().includes(query) || 
-                             item.category.toLowerCase().includes(query);
-        
-        let matchesThk = true;
-        if (thkVal !== 'ALL') {
-          const targetThk = parseFloat(thkVal);
-          if (targetThk === 12) {
-            matchesThk = item.thk >= 12;
-          } else if (targetThk === 10) {
-            matchesThk = item.thk >= 9.0 && item.thk <= 11.0;
-          } else if (targetThk === 8) {
-            matchesThk = item.thk >= 7.5 && item.thk <= 8.8;
-          } else if (targetThk === 6) {
-            matchesThk = item.thk >= 5.8 && item.thk <= 7.2;
-          } else if (targetThk === 4) {
-            matchesThk = item.thk >= 3.2 && item.thk <= 5.5;
-          } else if (targetThk === 2) {
-            matchesThk = item.thk <= 3.1;
-          }
-        }
-
-        return matchesCat && matchesQuery && matchesThk;
-      });
-
-      document.getElementById('rowCountLabel').innerText = `${filtered.length} Stock Item${filtered.length === 1 ? '' : 's'}`;
-
-      if (filtered.length === 0) {
-        body.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-zinc-500">No matching stock items found.</td></tr>`;
-        return;
-      }
-
-      body.innerHTML = filtered.map(item => {
-        const badgeClass = item.status === 'STD STOCK' ? 'badge-std' : 'badge-special';
-        return `
-          <tr>
-            <td class="font-bold text-zinc-400">${item.category}</td>
-            <td class="font-bold text-white">${item.desc}</td>
-            <td class="font-bold text-emerald-400 font-mono">${item.dims}</td>
-            <td class="font-mono text-zinc-300">${item.lengths}</td>
-            <td class="font-mono text-zinc-400">${item.weight}</td>
-            <td><span class="${badgeClass}">${item.status}</span></td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      filterData();
-    });
-  </script>
-</body>
-</html>
+        <!-- ALUMINIUM TAB -->
+        <div id="aluminium" class="tab-content">
+            <div class="data-card">
+                <div class="card-header">
+                    <span class="card-title">Aluminium Alloys Technical Overview</span>
+                    <span class="card-subtitle">Wrought Non-Heat-Treatable & Heat-Treatable Alloys</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Alloy Series</th>
+                                <th>Type</th>
+                                <th>Density (g/cm³)</th>
+                                <th>Typical Tempers</th>
+                                <th>Primary Characteristics & Applications</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1050 / 1200</strong></td>
+                                <td>Pure Al (Non-HT)[cite: 74, 78, 79]</td>
+                                <td>2.71[cite: 74, 78, 79]</td>
+                                <td>O, H14, H4[cite: 78, 79]</td>
+                                <td>Very high corrosion resistance, high electrical/thermal conductivity[cite: 77, 78, 79]. General sheet metal[cite: 77, 78, 79].</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3003 / 3004</strong></td>
+                                <td>Al-Mn / Al-Mn-Mg[cite: 80, 81]</td>
+                                <td>2.72 - 2.73[cite: 80, 81]</td>
+                                <td>O, H14, H24, H18[cite: 80, 81]</td>
+                                <td>Stronger than 1000 series[cite: 81], excellent formability[cite: 77, 80, 81]. Building products, cladding, signage[cite: 77, 81].</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5083 / 5251 / 5454</strong></td>
+                                <td>Al-Mg (Marine)[cite: 82, 84, 85]</td>
+                                <td>2.65 - 2.67[cite: 82, 84, 85]</td>
+                                <td>H2, H4, H3, H6[cite: 82, 84, 85]</td>
+                                <td>High strength non-HT alloys[cite: 77]. Exceptional resistance to seawater & marine atmospheres[cite: 77, 82, 84]. Pressure vessels, shipbuilding[cite: 77, 82, 85].</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6061 / 6063 / 6082</strong></td>
+                                <td>Al-Mg-Si (Heat-Treatable)[cite: 86, 87, 88]</td>
+                                <td>2.70 - 2.71[cite: 86, 87, 88]</td>
+                                <td>T4, T6, TF[cite: 86, 87, 88]</td>
+                                <td>Structural extrusions, architectural profiles, high strength-to-weight ratio[cite: 77, 86, 87, 88]. Bridges, transport frames
