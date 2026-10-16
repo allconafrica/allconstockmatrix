@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALLCON - Standard Commercial Stock Size Matrix</title>
+  
+  <!-- WAREHOUSE / MATRIX FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e53935'><path d='M4 3h16c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2zm0 4v3h16V7H4zm0 5v3h16v-3H4zm0 5v2h16v-2H4z'/></svg>">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0d0f12',
+            cardBg: '#14181d',
+            cardBorder: '#232931',
+            allconRed: '#e53935',
+            allconRedHover: '#f44336'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0d0f12;
+      color: #f0f3f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    input, select {
+      background-color: #090a0c !important;
+      color: #ffffff !important;
+      border-color: #232931 !important;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #e53935 !important;
+      box-shadow: 0 0 0 1px #e53935;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .matrix-table th {
+      background-color: #181d24;
+      color: #e53935;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 10px 12px;
+      border-bottom: 2px solid #232931;
+      text-align: left;
+    }
+
+    .matrix-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #232931;
+      color: #f0f3f6;
+    }
+
+    .matrix-table tr:hover td {
+      background-color: #1a2027;
+    }
+
+    .badge-std {
+      background-color: rgba(56, 142, 60, 0.2);
+      color: #81c784;
+      border: 1px solid #388e3c;
+      font-weight: 800;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .badge-special {
+      background-color: rgba(245, 124, 0, 0.2);
+      color: #ffb74d;
+      border: 1px solid #f57c00;
+      font-weight: 800;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+  <!-- HEADER -->
+  <header class="bg-[#14181d] border-b-2 border-allconRed px-6 py-4 shadow-lg">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-4">
+        <a href="https://allconafrica.github.io/allcondashboard/" class="flex items-center gap-3 hover:opacity-90 transition">
+          <img src="./ALLCON-Logo.jpg" alt="ALLCON Logo" class="h-10 w-auto rounded object-contain" onerror="this.onerror=null; this.outerHTML='<div class=\'bg-allconRed text-white font-black px-3 py-1 rounded text-xl tracking-wider\'>ALLCON</div>';">
+        </a>
+        <div>
+          <h1 class="text-xl font-black text-white tracking-tight flex items-center gap-2">
+            Standard Commercial Stock Size Matrix
+          </h1>
+          <p class="text-xs text-zinc-400">Off-the-Shelf Mill Availability Lookup Table</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="https://allconafrica.github.io/allcondashboard/" class="bg-[#1f2630] hover:bg-allconRed text-white text-xs font-bold px-4 py-2.5 rounded-lg border border-cardBorder transition flex items-center gap-2">
+          <i class="fa-solid fa-house text-xs"></i> Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full space-y-6">
+
+    <!-- CONTROLS & SEARCH BAR -->
+    <div class="bg-cardBg border border-cardBorder p-4 rounded-xl shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
+      
+      <!-- SEARCH INPUT -->
+      <div class="relative w-full md:w-1/2">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-zinc-500 text-xs"></i>
+        <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Search dimensions (e.g. 100x100, 16mm, PFC, Angle, 6000)..." class="w-full pl-9 pr-4 py-2 rounded-lg text-xs font-semibold">
+      </div>
+
+      <!-- CATEGORY TABS -->
+      <div class="flex flex-wrap gap-1.5 w-full md:w-auto bg-[#090a0c] p-1 rounded-lg border border-cardBorder">
+        <button onclick="setCategory('ALL', this)" class="cat-btn active px-3 py-1.5 rounded text-xs font-bold bg-allconRed text-white">All Sections</button>
+        <button onclick="setCategory('Plate', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Plates</button>
+        <button onclick="setCategory('Angle', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Equal Angle</button>
+        <button onclick="setCategory('Channel', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Channels (PFC)</button>
+        <button onclick="setCategory('Tubing', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Tubing (RHS/CHS)</button>
+        <button onclick="setCategory('Bar', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Flat & Round Bar</button>
+      </div>
+
+    </div>
+
+    <!-- DATA TABLE CARD -->
+    <div class="bg-cardBg border border-cardBorder rounded-xl p-5 shadow-xl">
+      <div class="flex justify-between items-center mb-3 border-b border-cardBorder pb-3">
+        <h2 class="text-sm font-black text-allconRed uppercase tracking-wider flex items-center gap-2">
+          <i class="fa-solid fa-table-list"></i> Mill Stock Availability
+        </h2>
+        <span class="text-xs text-zinc-400 font-mono" id="rowCountLabel">0 Stock Items</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Section / Profile Description</th>
+              <th>Dimensions (mm)</th>
+              <th>Std Lengths (m)</th>
+              <th>Nominal Weight</th>
+              <th>Availability Status</th>
+            </tr>
+          </thead>
+          <tbody id="matrixTableBody">
+            <!-- Dynamic rows inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-cardBg border-t border-cardBorder py-4 text-center text-xs text-zinc-500">
+    ALLCON Fabrication & Engineering &copy; 2026 | Technical Buyer Tools
+  </footer>
+
+  <script>
+    // Standard Commercial Mill Sizes Database
+    const stockMatrix = [
+      // PLATES
+      { category: 'Plate', desc: 'Mild Steel Commercial Plate', dims: '3.0 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '23.55 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Mild Steel Commercial Plate', dims: '4.5 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '35.33 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Mild Steel Commercial Plate', dims: '6.0 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '47.10 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Mild Steel Commercial Plate', dims: '8.0 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '62.80 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '10.0 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '78.50 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '12.0 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '94.20 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '16.0 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '125.60 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '20.0 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '157.00 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '25.0 mm', lengths: '2.5x1.2 / 6.0x2.4', weight: '196.25 kg/m²', status: 'STD STOCK' },
+      { category: 'Plate', desc: 'Heavy Structural Plate', dims: '30.0 mm', lengths: '6.0x2.4 m', weight: '235.50 kg/m²', status: 'SPECIAL ORDER' },
+      { category: 'Plate', desc: 'Heavy Structural Plate', dims: '40.0 mm', lengths: '6.0x2.4 m', weight: '314.00 kg/m²', status: 'SPECIAL ORDER' },
+
+      // EQUAL ANGLES
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '25 x 25 x 3 mm', lengths: '6.0 m', weight: '1.12 kg/m', status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '30 x 30 x 3 mm', lengths: '6.0 m', weight: '1.36 kg/m', status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '40 x 40 x 5 mm', lengths: '6.0 m', weight: '2.97 kg/m', status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '50 x 50 x 5 mm', lengths: '6.0 m / 12.0 m', weight: '3.77 kg/m', status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '70 x 70 x 6 mm', lengths: '6.0 m / 12.0 m', weight: '6.38 kg/m', status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '90 x 90 x 8 mm', lengths: '6.0 m / 12.0 m', weight: '10.90 kg/m', status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '100 x 100 x 10 mm', lengths: '6.0 m / 12.0 m', weight: '15.00 kg/m', status: 'STD STOCK' },
+
+      // PFC CHANNELS
+      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '100 x 50 mm', lengths: '6.0 m / 12.0 m', weight: '10.20 kg/m', status: 'STD STOCK' },
+      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '150 x 75 mm', lengths: '6.0 m / 12.0 m', weight: '17.90 kg/m', status: 'STD STOCK' },
+      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '180 x 75 mm', lengths: '6.0 m / 12.0 m', weight: '21.40 kg/m', status: 'STD STOCK' },
+      { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '200 x 75 mm', lengths: '6.0 m / 12.0 m', weight: '23.40 kg/m', status: 'STD STOCK' },
+
+      // TUBING
+      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '25 x 25 x 2.0 mm', lengths: '6.0 m', weight: '1.44 kg/m', status: 'STD STOCK' },
+      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '50 x 50 x 3.0 mm', lengths: '6.0 m', weight: '4.33 kg/m', status: 'STD STOCK' },
+      { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '100 x 100 x 4.0 mm', lengths: '6.0 m / 12.0 m', weight: '11.80 kg/m', status: 'STD STOCK' },
+      { category: 'Tubing', desc: 'Circular Hollow Section (CHS)', dims: '48.3 x 3.2 mm (40 NB)', lengths: '6.0 m', weight: '3.56 kg/m', status: 'STD STOCK' },
+      { category: 'Tubing', desc: 'Circular Hollow Section (CHS)', dims: '60.3 x 3.6 mm (50 NB)', lengths: '6.0 m', weight: '5.03 kg/m', status: 'STD STOCK' },
+
+      // BARS
+      { category: 'Bar', desc: 'Flat Bar', dims: '25 x 5 mm', lengths: '6.0 m', weight: '0.98 kg/m', status: 'STD STOCK' },
+      { category: 'Bar', desc: 'Flat Bar', dims: '50 x 6 mm', lengths: '6.0 m', weight: '2.36 kg/m', status: 'STD STOCK' },
+      { category: 'Bar', desc: 'Flat Bar', dims: '100 x 10 mm', lengths: '6.0 m', weight: '7.85 kg/m', status: 'STD STOCK' },
+      { category: 'Bar', desc: 'Round Bar', dims: '12 mm Dia', lengths: '6.0 m', weight: '0.89 kg/m', status: 'STD STOCK' },
+      { category: 'Bar', desc: 'Round Bar', dims: '20 mm Dia', lengths: '6.0 m', weight: '2.47 kg/m', status: 'STD STOCK' },
+      { category: 'Bar', desc: 'Round Bar', dims: '50 mm Dia', lengths: '6.0 m', weight: '15.41 kg/m', status: 'SPECIAL ORDER' }
+    ];
+
+    let selectedCategory = 'ALL';
+
+    function setCategory(cat, btn) {
+      selectedCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.className = 'cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white';
+      });
+      btn.className = 'cat-btn active px-3 py-1.5 rounded text-xs font-bold bg-allconRed text-white';
+      filterData();
+    }
+
+    function filterData() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const body = document.getElementById('matrixTableBody');
+
+      const filtered = stockMatrix.filter(item => {
+        const matchesCat = selectedCategory === 'ALL' || item.category === selectedCategory;
+        const matchesQuery = item.desc.toLowerCase().includes(query) || 
+                             item.dims.toLowerCase().includes(query) || 
+                             item.category.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+      });
+
+      document.getElementById('rowCountLabel').innerText = `${filtered.length} Stock Item${filtered.length === 1 ? '' : 's'}`;
+
+      if (filtered.length === 0) {
+        body.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-zinc-500">No matching stock items found.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = filtered.map(item => {
+        const badgeClass = item.status === 'STD STOCK' ? 'badge-std' : 'badge-special';
+        return `
+          <tr>
+            <td class="font-bold text-zinc-400">${item.category}</td>
+            <td class="font-bold text-white">${item.desc}</td>
+            <td class="font-bold text-emerald-400 font-mono">${item.dims}</td>
+            <td class="font-mono text-zinc-300">${item.lengths}</td>
+            <td class="font-mono text-zinc-400">${item.weight}</td>
+            <td><span class="${badgeClass}">${item.status}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      filterData();
+    });
+  </script>
+</body>
+</html>
