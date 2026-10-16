@@ -108,18 +108,39 @@ const steelData = {
         { name: "150 x 75 x 5.0 RHS", cls: "RHS", dimA: 150.0, dimB: 75.0, wt: 5.0, mass: 16.40, lengths: ["6.0m", "12.0m"] },
         { name: "200 x 100 x 5.0 RHS", cls: "RHS", dimA: 200.0, dimB: 100.0, wt: 5.0, mass: 22.30, lengths: ["6.0m", "12.0m", "13.0m"] },
 
-        // PIPES
-        { name: "15 NB Pipe (21.3 OD x 2.65 Med)", cls: "PIPE", dimA: 21.3, dimB: null, wt: 2.65, mass: 1.22, lengths: ["6.0m"] },
-        { name: "20 NB Pipe (26.9 OD x 2.65 Med)", cls: "PIPE", dimA: 26.9, dimB: null, wt: 2.65, mass: 1.58, lengths: ["6.0m"] },
-        { name: "25 NB Pipe (33.7 OD x 3.25 Med)", cls: "PIPE", dimA: 33.7, dimB: null, wt: 3.25, mass: 2.44, lengths: ["6.0m"] },
-        { name: "32 NB Pipe (42.4 OD x 3.25 Med)", cls: "PIPE", dimA: 42.4, dimB: null, wt: 3.25, mass: 3.14, lengths: ["6.0m"] },
-        { name: "40 NB Pipe (48.3 OD x 3.25 Med)", cls: "PIPE", dimA: 48.3, dimB: null, wt: 3.25, mass: 3.61, lengths: ["6.0m"] },
-        { name: "50 NB Pipe (60.3 OD x 3.65 Med)", cls: "PIPE", dimA: 60.3, dimB: null, wt: 3.65, mass: 5.10, lengths: ["6.0m"] },
-        { name: "65 NB Pipe (76.1 OD x 3.65 Med)", cls: "PIPE", dimA: 76.1, dimB: null, wt: 3.65, mass: 6.51, lengths: ["6.0m"] },
-        { name: "80 NB Pipe (88.9 OD x 4.05 Med)", cls: "PIPE", dimA: 88.9, dimB: null, wt: 4.05, mass: 8.47, lengths: ["6.0m", "12.0m"] },
-        { name: "100 NB Pipe (114.3 OD x 4.5 Heavy)", cls: "PIPE", dimA: 114.3, dimB: null, wt: 4.50, mass: 12.20, lengths: ["6.0m", "12.0m"] },
-        { name: "150 NB Pipe (165.1 OD x 4.85 Heavy)", cls: "PIPE", dimA: 165.1, dimB: null, wt: 4.85, mass: 19.20, lengths: ["6.0m", "12.0m"] },
-        { name: "200 NB Pipe (219.1 OD x 6.35 Sch 20)", cls: "PIPE", dimA: 219.1, dimB: null, wt: 6.35, mass: 33.30, lengths: ["6.0m", "12.0m"] }
+        // SCHEDULE 10 LINE PIPES (LIGHT WALL STAINLESS / PROCESS)
+        { name: "15 NB Pipe (21.3 OD x 2.11 WT - Sch 10S)", cls: "PIPE", dimA: 21.3, dimB: null, wt: 2.11, mass: 1.00, lengths: ["6.0m"] },
+        { name: "20 NB Pipe (26.7 OD x 2.11 WT - Sch 10S)", cls: "PIPE", dimA: 26.7, dimB: null, wt: 2.11, mass: 1.29, lengths: ["6.0m"] },
+        { name: "25 NB Pipe (33.4 OD x 2.77 WT - Sch 10S)", cls: "PIPE", dimA: 33.4, dimB: null, wt: 2.77, mass: 2.11, lengths: ["6.0m"] },
+        { name: "32 NB Pipe (42.2 OD x 2.77 WT - Sch 10S)", cls: "PIPE", dimA: 42.2, dimB: null, wt: 2.77, mass: 2.71, lengths: ["6.0m"] },
+        { name: "40 NB Pipe (48.3 OD x 2.77 WT - Sch 10S)", cls: "PIPE", dimA: 48.3, dimB: null, wt: 2.77, mass: 3.13, lengths: ["6.0m"] },
+        { name: "50 NB Pipe (60.3 OD x 2.77 WT - Sch 10S)", cls: "PIPE", dimA: 60.3, dimB: null, wt: 2.77, mass: 3.96, lengths: ["6.0m"] },
+        { name: "65 NB Pipe (73.0 OD x 3.05 WT - Sch 10S)", cls: "PIPE", dimA: 73.0, dimB: null, wt: 3.05, mass: 5.29, lengths: ["6.0m"] },
+        { name: "80 NB Pipe (88.9 OD x 3.05 WT - Sch 10S)", cls: "PIPE", dimA: 88.9, dimB: null, wt: 3.05, mass: 6.50, lengths: ["6.0m", "12.0m"] },
+        { name: "100 NB Pipe (114.3 OD x 3.05 WT - Sch 10S)", cls: "PIPE", dimA: 114.3, dimB: null, wt: 3.05, mass: 8.42, lengths: ["6.0m", "12.0m"] },
+        { name: "150 NB Pipe (168.3 OD x 3.40 WT - Sch 10S)", cls: "PIPE", dimA: 168.3, dimB: null, wt: 3.40, mass: 13.91, lengths: ["6.0m", "12.0m"] },
+        { name: "200 NB Pipe (219.1 OD x 3.76 WT - Sch 10S)", cls: "PIPE", dimA: 219.1, dimB: null, wt: 3.76, mass: 20.10, lengths: ["6.0m", "12.0m"] },
+
+        // SCHEDULE 40 LINE PIPES (STANDARD WALL)
+        { name: "15 NB Pipe (21.3 OD x 2.77 WT - Sch 40)", cls: "PIPE", dimA: 21.3, dimB: null, wt: 2.77, mass: 1.27, lengths: ["6.0m"] },
+        { name: "20 NB Pipe (26.6 OD x 2.87 WT - Sch 40)", cls: "PIPE", dimA: 26.6, dimB: null, wt: 2.87, mass: 1.68, lengths: ["6.0m"] },
+        { name: "25 NB Pipe (33.4 OD x 3.38 WT - Sch 40)", cls: "PIPE", dimA: 33.4, dimB: null, wt: 3.38, mass: 2.50, lengths: ["6.0m"] },
+        { name: "32 NB Pipe (42.1 OD x 3.56 WT - Sch 40)", cls: "PIPE", dimA: 42.1, dimB: null, wt: 3.56, mass: 3.39, lengths: ["6.0m"] },
+        { name: "40 NB Pipe (48.2 OD x 3.68 WT - Sch 40)", cls: "PIPE", dimA: 48.2, dimB: null, wt: 3.68, mass: 4.05, lengths: ["6.0m"] },
+        { name: "50 NB Pipe (60.3 OD x 3.91 WT - Sch 40)", cls: "PIPE", dimA: 60.3, dimB: null, wt: 3.91, mass: 5.44, lengths: ["6.0m"] },
+        { name: "65 NB Pipe (73.0 OD x 5.16 WT - Sch 40)", cls: "PIPE", dimA: 73.0, dimB: null, wt: 5.16, mass: 8.64, lengths: ["6.0m"] },
+        { name: "80 NB Pipe (88.9 OD x 5.49 WT - Sch 40)", cls: "PIPE", dimA: 88.9, dimB: null, wt: 5.49, mass: 11.29, lengths: ["6.0m", "12.0m"] },
+        { name: "100 NB Pipe (114.3 OD x 6.02 WT - Sch 40)", cls: "PIPE", dimA: 114.3, dimB: null, wt: 6.02, mass: 16.08, lengths: ["6.0m", "12.0m"] },
+        { name: "150 NB Pipe (168.2 OD x 7.11 WT - Sch 40)", cls: "PIPE", dimA: 168.2, dimB: null, wt: 7.11, mass: 28.26, lengths: ["6.0m", "12.0m"] },
+        { name: "200 NB Pipe (219.1 OD x 8.18 WT - Sch 40)", cls: "PIPE", dimA: 219.1, dimB: null, wt: 8.18, mass: 42.55, lengths: ["6.0m", "12.0m"] },
+
+        // SCHEDULE 80 LINE PIPES (EXTRA HEAVY WALL)
+        { name: "25 NB Pipe (33.4 OD x 4.55 WT - Sch 80)", cls: "PIPE", dimA: 33.4, dimB: null, wt: 4.55, mass: 3.24, lengths: ["6.0m"] },
+        { name: "50 NB Pipe (60.3 OD x 5.54 WT - Sch 80)", cls: "PIPE", dimA: 60.3, dimB: null, wt: 5.54, mass: 7.48, lengths: ["6.0m"] },
+        { name: "80 NB Pipe (88.9 OD x 7.62 WT - Sch 80)", cls: "PIPE", dimA: 88.9, dimB: null, wt: 7.62, mass: 15.27, lengths: ["6.0m", "12.0m"] },
+        { name: "100 NB Pipe (114.3 OD x 8.56 WT - Sch 80)", cls: "PIPE", dimA: 114.3, dimB: null, wt: 8.56, mass: 22.32, lengths: ["6.0m", "12.0m"] },
+        { name: "150 NB Pipe (168.3 OD x 10.97 WT - Sch 80)", cls: "PIPE", dimA: 168.3, dimB: null, wt: 10.97, mass: 42.56, lengths: ["6.0m", "12.0m"] }
+    ],
     ],
   plates: [
         // S275JR STRUCTURAL PLATES & SHEETS
