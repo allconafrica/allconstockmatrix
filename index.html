@@ -107,7 +107,7 @@
           <h1 class="text-xl font-black text-white tracking-tight flex items-center gap-2">
             Standard Commercial Stock Size Matrix
           </h1>
-          <p class="text-xs text-zinc-400">Off-the-Shelf Mill Availability Lookup Table</p>
+          <p class="text-xs text-zinc-400">Comprehensive Mill Availability & Pipe Schedule Lookup</p>
         </div>
       </div>
 
@@ -129,21 +129,20 @@
         <!-- SEARCH INPUT -->
         <div class="md:col-span-7 relative">
           <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-zinc-500 text-xs"></i>
-          <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Search section, size, or thickness (e.g. 150x150, 10mm, PFC, Angle, 300x100)..." class="w-full pl-9 pr-4 py-2 rounded-lg text-xs font-semibold">
+          <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Search dimensions or schedules (e.g. 120x120, Sched 40, 88.9 OD, 150x150, 8mm)..." class="w-full pl-9 pr-4 py-2 rounded-lg text-xs font-semibold">
         </div>
 
         <!-- THICKNESS / GAUGE FILTER -->
         <div class="md:col-span-5 flex items-center gap-2">
-          <label class="text-xs font-bold text-zinc-400 whitespace-nowrap uppercase">Thk / Wall Filter:</label>
+          <label class="text-xs font-bold text-zinc-400 whitespace-nowrap uppercase">Wall / Thk Filter:</label>
           <select id="thkFilter" onchange="filterData()" class="w-full p-2 rounded-lg text-xs font-bold">
-            <option value="ALL">All Thicknesses</option>
-            <option value="3">3.0 mm</option>
-            <option value="4.5">4.5 mm / 5.0 mm</option>
+            <option value="ALL">All Wall Thicknesses</option>
+            <option value="2">2.0 mm - 3.0 mm</option>
+            <option value="4">3.2 mm - 5.0 mm</option>
             <option value="6">6.0 mm</option>
             <option value="8">8.0 mm</option>
-            <option value="10">10.0 mm</option>
-            <option value="12">12.0 mm</option>
-            <option value="16">16.0 mm +</option>
+            <option value="10">10.0 mm / Sched 40</option>
+            <option value="12">12.0 mm +</option>
           </select>
         </div>
       </div>
@@ -151,12 +150,13 @@
       <!-- CATEGORY TABS -->
       <div class="flex flex-wrap gap-1.5 bg-[#090a0c] p-1.5 rounded-lg border border-cardBorder">
         <button onclick="setCategory('ALL', this)" class="cat-btn active px-3 py-1.5 rounded text-xs font-bold bg-allconRed text-white">All Sections</button>
-        <button onclick="setCategory('Angle', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Equal Angle</button>
+        <button onclick="setCategory('Pipe', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Pipes (NB & Sched)</button>
+        <button onclick="setCategory('Angle', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Equal & Unequal Angle</button>
         <button onclick="setCategory('Tubing', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Square / Rect Tubing</button>
         <button onclick="setCategory('Channel', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Channels (PFC)</button>
-        <button onclick="setCategory('Beam', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Beams / Columns (IPE/UB/UC)</button>
+        <button onclick="setCategory('Beam', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Beams (IPE/UB/UC)</button>
         <button onclick="setCategory('Plate', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Plates</button>
-        <button onclick="setCategory('Bar', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Flat & Round Bar</button>
+        <button onclick="setCategory('Bar', this)" class="cat-btn px-3 py-1.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Bars & Rods</button>
       </div>
 
     </div>
@@ -165,7 +165,7 @@
     <div class="bg-cardBg border border-cardBorder rounded-xl p-5 shadow-xl">
       <div class="flex justify-between items-center mb-3 border-b border-cardBorder pb-3">
         <h2 class="text-sm font-black text-allconRed uppercase tracking-wider flex items-center gap-2">
-          <i class="fa-solid fa-table-list"></i> Mill Stock Availability
+          <i class="fa-solid fa-table-list"></i> Mill Stock Availability Matrix
         </h2>
         <span class="text-xs text-zinc-400 font-mono" id="rowCountLabel">0 Stock Items</span>
       </div>
@@ -176,7 +176,7 @@
             <tr>
               <th>Category</th>
               <th>Section / Profile Description</th>
-              <th>Dimensions (mm)</th>
+              <th>Dimensions / OD (mm)</th>
               <th>Std Lengths (m)</th>
               <th>Nominal Weight</th>
               <th>Availability Status</th>
@@ -197,9 +197,50 @@
   </footer>
 
   <script>
-    // Comprehensive Commercial Mill Sizes Database
+    // Fully Comprehensive Commercial Mill Sizes & Pipe Schedule Matrix
     const stockMatrix = [
-      // EQUAL ANGLES (Updated Lengths: 6M / 9M / 11M / 13M)
+      // PIPES (NB & SCHEDULES - 15NB TO 600NB)
+      { category: 'Pipe', desc: '15 NB Pipe (21.3mm OD) - Sched 10', dims: '21.3 OD x 2.11 mm Wall', lengths: '6.0 m', weight: '1.00 kg/m', thk: 2.11, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '15 NB Pipe (21.3mm OD) - Sched 40 / STD', dims: '21.3 OD x 2.77 mm Wall', lengths: '6.0 m', weight: '1.27 kg/m', thk: 2.77, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '15 NB Pipe (21.3mm OD) - Sched 80 / XS', dims: '21.3 OD x 3.73 mm Wall', lengths: '6.0 m', weight: '1.62 kg/m', thk: 3.73, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '20 NB Pipe (26.7mm OD) - Sched 10', dims: '26.7 OD x 2.11 mm Wall', lengths: '6.0 m', weight: '1.28 kg/m', thk: 2.11, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '20 NB Pipe (26.7mm OD) - Sched 40 / STD', dims: '26.7 OD x 2.87 mm Wall', lengths: '6.0 m', weight: '1.69 kg/m', thk: 2.87, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '20 NB Pipe (26.7mm OD) - Sched 80 / XS', dims: '26.7 OD x 3.91 mm Wall', lengths: '6.0 m', weight: '2.20 kg/m', thk: 3.91, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '25 NB Pipe (33.4mm OD) - Sched 10', dims: '33.4 OD x 2.77 mm Wall', lengths: '6.0 m', weight: '2.09 kg/m', thk: 2.77, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '25 NB Pipe (33.4mm OD) - Sched 40 / STD', dims: '33.4 OD x 3.38 mm Wall', lengths: '6.0 m', weight: '2.50 kg/m', thk: 3.38, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '25 NB Pipe (33.4mm OD) - Sched 80 / XS', dims: '33.4 OD x 4.55 mm Wall', lengths: '6.0 m', weight: '3.24 kg/m', thk: 4.55, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '40 NB Pipe (48.3mm OD) - Sched 10', dims: '48.3 OD x 2.77 mm Wall', lengths: '6.0 m', weight: '3.11 kg/m', thk: 2.77, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '40 NB Pipe (48.3mm OD) - Sched 40 / STD', dims: '48.3 OD x 3.68 mm Wall', lengths: '6.0 m', weight: '4.05 kg/m', thk: 3.68, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '40 NB Pipe (48.3mm OD) - Sched 80 / XS', dims: '48.3 OD x 5.08 mm Wall', lengths: '6.0 m', weight: '5.41 kg/m', thk: 5.08, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '50 NB Pipe (60.3mm OD) - Sched 10', dims: '60.3 OD x 2.77 mm Wall', lengths: '6.0 m', weight: '3.93 kg/m', thk: 2.77, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '50 NB Pipe (60.3mm OD) - Sched 40 / STD', dims: '60.3 OD x 3.91 mm Wall', lengths: '6.0 m', weight: '5.44 kg/m', thk: 3.91, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '50 NB Pipe (60.3mm OD) - Sched 80 / XS', dims: '60.3 OD x 5.54 mm Wall', lengths: '6.0 m', weight: '7.48 kg/m', thk: 5.54, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '80 NB Pipe (88.9mm OD) - Sched 10', dims: '88.9 OD x 3.05 mm Wall', lengths: '6.0 m', weight: '6.55 kg/m', thk: 3.05, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '80 NB Pipe (88.9mm OD) - Sched 40 / STD', dims: '88.9 OD x 5.49 mm Wall', lengths: '6.0 m', weight: '11.29 kg/m', thk: 5.49, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '80 NB Pipe (88.9mm OD) - Sched 80 / XS', dims: '88.9 OD x 7.62 mm Wall', lengths: '6.0 m', weight: '15.27 kg/m', thk: 7.62, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '100 NB Pipe (114.3mm OD) - Sched 10', dims: '114.3 OD x 3.05 mm Wall', lengths: '6.0 m', weight: '8.49 kg/m', thk: 3.05, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '100 NB Pipe (114.3mm OD) - Sched 40 / STD', dims: '114.3 OD x 6.02 mm Wall', lengths: '6.0 m', weight: '16.07 kg/m', thk: 6.02, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '100 NB Pipe (114.3mm OD) - Sched 80 / XS', dims: '114.3 OD x 8.56 mm Wall', lengths: '6.0 m', weight: '22.32 kg/m', thk: 8.56, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '150 NB Pipe (168.3mm OD) - Sched 10', dims: '168.3 OD x 3.40 mm Wall', lengths: '6.0 m / 12.0 m', weight: '13.80 kg/m', thk: 3.40, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '150 NB Pipe (168.3mm OD) - Sched 40 / STD', dims: '168.3 OD x 7.11 mm Wall', lengths: '6.0 m / 12.0 m', weight: '28.26 kg/m', thk: 7.11, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '150 NB Pipe (168.3mm OD) - Sched 80 / XS', dims: '168.3 OD x 10.97 mm Wall', lengths: '6.0 m / 12.0 m', weight: '42.56 kg/m', thk: 10.97, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '200 NB Pipe (219.1mm OD) - Sched 10', dims: '219.1 OD x 3.76 mm Wall', lengths: '6.0 m / 12.0 m', weight: '19.96 kg/m', thk: 3.76, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '200 NB Pipe (219.1mm OD) - Sched 40 / STD', dims: '219.1 OD x 8.18 mm Wall', lengths: '6.0 m / 12.0 m', weight: '42.55 kg/m', thk: 8.18, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '200 NB Pipe (219.1mm OD) - Sched 80 / XS', dims: '219.1 OD x 12.70 mm Wall', lengths: '6.0 m / 12.0 m', weight: '64.64 kg/m', thk: 12.7, status: 'STD STOCK' },
+
+      { category: 'Pipe', desc: '250 NB Pipe (273.0mm OD) - Sched 10', dims: '273.0 OD x 4.19 mm Wall', lengths: '6.0 m / 12.0 m', weight: '27.78 kg/m', thk: 4.19, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '250 NB Pipe (273.0mm OD) - Sched 40 / STD', dims: '273.0 OD x 9.27 mm Wall', lengths: '6.0 m / 12.0 m', weight: '60.31 kg/m', thk: 9.27, status: 'STD STOCK' },
+      { category: 'Pipe', desc: '300 NB Pipe (323.9mm OD) - Sched 40 / STD', dims: '323.9 OD x 10.31 mm Wall', lengths: '6.0 m / 12.0 m', weight: '79.73 kg/m', thk: 10.31, status: 'STD STOCK' },
+
+      // EQUAL ANGLES (FULL INCREMENTS INC. 120x120x8)
       { category: 'Angle', desc: 'Equal Angle Iron', dims: '25 x 25 x 3.0 mm', lengths: '6.0 m', weight: '1.12 kg/m', thk: 3, status: 'STD STOCK' },
       { category: 'Angle', desc: 'Equal Angle Iron', dims: '30 x 30 x 3.0 mm', lengths: '6.0 m', weight: '1.36 kg/m', thk: 3, status: 'STD STOCK' },
       { category: 'Angle', desc: 'Equal Angle Iron', dims: '40 x 40 x 3.0 mm', lengths: '6.0 m', weight: '1.83 kg/m', thk: 3, status: 'STD STOCK' },
@@ -212,10 +253,14 @@
       { category: 'Angle', desc: 'Equal Angle Iron', dims: '90 x 90 x 8.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '10.90 kg/m', thk: 8, status: 'STD STOCK' },
       { category: 'Angle', desc: 'Equal Angle Iron', dims: '100 x 100 x 8.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '12.20 kg/m', thk: 8, status: 'STD STOCK' },
       { category: 'Angle', desc: 'Equal Angle Iron', dims: '100 x 100 x 10.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '15.00 kg/m', thk: 10, status: 'STD STOCK' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '120 x 120 x 10.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '18.20 kg/m', thk: 10, status: 'SPECIAL ORDER' },
-      { category: 'Angle', desc: 'Equal Angle Iron', dims: '150 x 150 x 12.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '27.30 kg/m', thk: 12, status: 'SPECIAL ORDER' },
+      { category: 'Angle', desc: 'Equal Angle Iron (Labyrinth)', dims: '120 x 120 x 8.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '14.70 kg/m', thk: 8, status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '120 x 120 x 10.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '18.20 kg/m', thk: 10, status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '120 x 120 x 12.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '21.60 kg/m', thk: 12, status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '150 x 150 x 10.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '23.00 kg/m', thk: 10, status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '150 x 150 x 12.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '27.30 kg/m', thk: 12, status: 'STD STOCK' },
+      { category: 'Angle', desc: 'Equal Angle Iron', dims: '200 x 200 x 16.0 mm', lengths: '6.0 m / 9.0 m / 11.0 m / 13.0 m', weight: '48.50 kg/m', thk: 16, status: 'SPECIAL ORDER' },
 
-      // SQUARE & RECTANGULAR TUBING (EXPANDED TO 150x150x10, 200x200, 250x250, 300x300)
+      // TUBING (SHS / RHS UP TO 300x300)
       { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '25 x 25 x 2.0 mm', lengths: '6.0 m', weight: '1.44 kg/m', thk: 2, status: 'STD STOCK' },
       { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '38 x 38 x 2.0 mm', lengths: '6.0 m', weight: '2.26 kg/m', thk: 2, status: 'STD STOCK' },
       { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '50 x 50 x 3.0 mm', lengths: '6.0 m', weight: '4.33 kg/m', thk: 3, status: 'STD STOCK' },
@@ -230,11 +275,6 @@
       { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '200 x 200 x 10.0 mm', lengths: '6.0 m / 12.0 m', weight: '58.00 kg/m', thk: 10, status: 'STD STOCK' },
       { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '250 x 250 x 10.0 mm', lengths: '6.0 m / 12.0 m', weight: '73.70 kg/m', thk: 10, status: 'SPECIAL ORDER' },
       { category: 'Tubing', desc: 'Square Hollow Section (RHS)', dims: '300 x 300 x 12.0 mm', lengths: '6.0 m / 12.0 m', weight: '107.00 kg/m', thk: 12, status: 'SPECIAL ORDER' },
-
-      { category: 'Tubing', desc: 'Rectangular Hollow Section', dims: '76 x 38 x 3.0 mm', lengths: '6.0 m', weight: '4.89 kg/m', thk: 3, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Rectangular Hollow Section', dims: '100 x 50 x 4.0 mm', lengths: '6.0 m / 12.0 m', weight: '8.66 kg/m', thk: 4, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Rectangular Hollow Section', dims: '150 x 100 x 6.0 mm', lengths: '6.0 m / 12.0 m', weight: '21.80 kg/m', thk: 6, status: 'STD STOCK' },
-      { category: 'Tubing', desc: 'Rectangular Hollow Section', dims: '200 x 100 x 8.0 mm', lengths: '6.0 m / 12.0 m', weight: '34.50 kg/m', thk: 8, status: 'STD STOCK' },
 
       // PARALLEL FLANGE CHANNELS (PFC)
       { category: 'Channel', desc: 'Parallel Flange Channel (PFC)', dims: '100 x 50 mm', lengths: '6.0 m / 12.0 m', weight: '10.20 kg/m', thk: 5, status: 'STD STOCK' },
@@ -263,7 +303,7 @@
       { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '16.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '125.60 kg/m²', thk: 16, status: 'STD STOCK' },
       { category: 'Plate', desc: 'Mild Steel S355JR Plate', dims: '20.0 mm', lengths: '2.5x1.2 / 6.0x2.4 m', weight: '157.00 kg/m²', thk: 20, status: 'STD STOCK' },
 
-      // FLAT & ROUND BARS
+      // BARS
       { category: 'Bar', desc: 'Flat Bar', dims: '25 x 5.0 mm', lengths: '6.0 m', weight: '0.98 kg/m', thk: 5, status: 'STD STOCK' },
       { category: 'Bar', desc: 'Flat Bar', dims: '50 x 6.0 mm', lengths: '6.0 m', weight: '2.36 kg/m', thk: 6, status: 'STD STOCK' },
       { category: 'Bar', desc: 'Flat Bar', dims: '100 x 10.0 mm', lengths: '6.0 m', weight: '7.85 kg/m', thk: 10, status: 'STD STOCK' },
@@ -296,12 +336,18 @@
         let matchesThk = true;
         if (thkVal !== 'ALL') {
           const targetThk = parseFloat(thkVal);
-          if (targetThk === 16) {
-            matchesThk = item.thk >= 16;
-          } else if (targetThk === 4.5) {
-            matchesThk = item.thk === 4.5 || item.thk === 5.0;
-          } else {
-            matchesThk = item.thk === targetThk;
+          if (targetThk === 12) {
+            matchesThk = item.thk >= 12;
+          } else if (targetThk === 10) {
+            matchesThk = item.thk >= 9.0 && item.thk <= 11.0;
+          } else if (targetThk === 8) {
+            matchesThk = item.thk >= 7.5 && item.thk <= 8.8;
+          } else if (targetThk === 6) {
+            matchesThk = item.thk >= 5.8 && item.thk <= 7.2;
+          } else if (targetThk === 4) {
+            matchesThk = item.thk >= 3.2 && item.thk <= 5.5;
+          } else if (targetThk === 2) {
+            matchesThk = item.thk <= 3.1;
           }
         }
 
