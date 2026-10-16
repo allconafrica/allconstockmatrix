@@ -1,0 +1,190 @@
+const steelData = {
+    structural: [
+        // IPE & IPE AA
+        { name: "IPE 100 AA", type: "IPE", h: 97.6, b: 55.0, tw: 3.6, tf: 4.5, mass: 6.72, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "IPE 100", type: "IPE", h: 100.0, b: 55.0, tw: 4.1, tf: 5.7, mass: 8.10, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "IPE 120 AA", type: "IPE", h: 117.0, b: 64.0, tw: 3.8, tf: 4.8, mass: 8.36, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "IPE 120", type: "IPE", h: 120.0, b: 64.0, tw: 4.4, tf: 6.3, mass: 10.40, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "IPE 140 AA", type: "IPE", h: 136.6, b: 73.0, tw: 3.8, tf: 5.2, mass: 10.05, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "IPE 140", type: "IPE", h: 140.0, b: 73.0, tw: 4.7, tf: 6.9, mass: 12.90, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "IPE 160 AA", type: "IPE", h: 156.4, b: 82.0, tw: 4.0, tf: 5.6, mass: 12.31, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "IPE 160", type: "IPE", h: 160.0, b: 82.0, tw: 5.0, tf: 7.4, mass: 15.80, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "IPE 180 AA", type: "IPE", h: 176.4, b: 91.0, tw: 4.3, tf: 6.2, mass: 15.42, lengths: ["9.0m", "12.0m", "13.0m"] },
+        { name: "IPE 180", type: "IPE", h: 180.0, b: 91.0, tw: 5.3, tf: 8.0, mass: 18.80, lengths: ["9.0m", "12.0m", "13.0m"] },
+        { name: "IPE 200 AA", type: "IPE", h: 196.4, b: 100.0, tw: 4.5, tf: 6.7, mass: 18.40, lengths: ["9.0m", "12.0m", "13.0m"] },
+        { name: "IPE 200", type: "IPE", h: 200.0, b: 100.0, tw: 5.6, tf: 8.5, mass: 22.40, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+
+        // UNIVERSAL BEAMS (UB)
+        { name: "203 x 133 x 25 UB", type: "UB", h: 203.2, b: 133.2, tw: 5.7, tf: 7.8, mass: 25.10, lengths: ["9.0m", "11.0m", "12.0m", "13.0m"] },
+        { name: "203 x 133 x 30 UB", type: "UB", h: 206.8, b: 133.9, tw: 6.4, tf: 9.6, mass: 30.00, lengths: ["9.0m", "11.0m", "12.0m", "13.0m"] },
+        { name: "254 x 146 x 31 UB", type: "UB", h: 251.4, b: 146.1, tw: 6.0, tf: 8.6, mass: 31.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "254 x 146 x 37 UB", type: "UB", h: 256.0, b: 146.4, tw: 6.3, tf: 10.9, mass: 37.00, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "305 x 165 x 40 UB", type: "UB", h: 303.4, b: 165.7, tw: 6.0, tf: 10.2, mass: 40.30, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "305 x 165 x 46 UB", type: "UB", h: 306.6, b: 165.7, tw: 6.7, tf: 11.8, mass: 46.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "356 x 171 x 45 UB", type: "UB", h: 351.4, b: 171.1, tw: 7.0, tf: 9.7, mass: 45.00, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "356 x 171 x 57 UB", type: "UB", h: 358.0, b: 172.2, tw: 8.1, tf: 13.0, mass: 57.00, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "406 x 178 x 54 UB", type: "UB", h: 402.6, b: 177.7, tw: 7.7, tf: 10.9, mass: 54.10, lengths: ["12.0m", "13.0m", "15.0m", "18.0m"] },
+        { name: "406 x 178 x 67 UB", type: "UB", h: 409.4, b: 178.8, tw: 8.8, tf: 14.3, mass: 67.10, lengths: ["12.0m", "13.0m", "15.0m", "18.0m"] },
+        { name: "457 x 191 x 67 UB", type: "UB", h: 453.4, b: 189.9, tw: 8.5, tf: 12.7, mass: 67.10, lengths: ["12.0m", "13.0m", "15.0m", "18.0m"] },
+        { name: "457 x 191 x 82 UB", type: "UB", h: 460.0, b: 191.3, tw: 9.9, tf: 16.0, mass: 82.10, lengths: ["12.0m", "13.0m", "15.0m", "18.0m"] },
+
+        // UNIVERSAL COLUMNS (UC)
+        { name: "152 x 152 x 23 UC", type: "UC", h: 152.4, b: 152.4, tw: 5.8, tf: 6.8, mass: 23.00, lengths: ["9.0m", "11.0m", "12.0m", "13.0m"] },
+        { name: "152 x 152 x 30 UC", type: "UC", h: 157.6, b: 152.9, tw: 6.5, tf: 9.4, mass: 30.00, lengths: ["9.0m", "11.0m", "12.0m", "13.0m"] },
+        { name: "152 x 152 x 37 UC", type: "UC", h: 161.8, b: 154.4, tw: 8.0, tf: 11.5, mass: 37.00, lengths: ["9.0m", "11.0m", "12.0m", "13.0m"] },
+        { name: "203 x 203 x 46 UC", type: "UC", h: 203.2, b: 203.6, tw: 7.2, tf: 11.0, mass: 46.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "203 x 203 x 60 UC", type: "UC", h: 209.6, b: 205.8, tw: 9.4, tf: 14.2, mass: 60.00, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "254 x 254 x 73 UC", type: "UC", h: 254.1, b: 254.6, tw: 8.6, tf: 14.2, mass: 73.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "254 x 254 x 89 UC", type: "UC", h: 260.3, b: 256.3, tw: 10.3, tf: 17.3, mass: 88.90, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+
+        // PARALLEL FLANGE CHANNELS (PFC)
+        { name: "100 x 50 PFC", type: "PFC", h: 100.0, b: 50.0, tw: 5.0, tf: 8.5, mass: 10.20, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "125 x 65 PFC", type: "PFC", h: 125.0, b: 65.0, tw: 5.5, tf: 9.5, mass: 13.40, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "150 x 75 PFC", type: "PFC", h: 150.0, b: 75.0, tw: 5.5, tf: 10.0, mass: 17.90, lengths: ["9.0m", "12.0m", "13.0m"] },
+        { name: "180 x 75 PFC", type: "PFC", h: 180.0, b: 75.0, tw: 6.0, tf: 10.5, mass: 20.30, lengths: ["9.0m", "12.0m", "13.0m"] },
+        { name: "200 x 75 PFC", type: "PFC", h: 200.0, b: 75.0, tw: 6.0, tf: 11.5, mass: 23.40, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "230 x 75 PFC", type: "PFC", h: 230.0, b: 75.0, tw: 6.5, tf: 12.0, mass: 25.70, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "260 x 90 PFC", type: "PFC", h: 260.0, b: 90.0, tw: 7.0, tf: 14.0, mass: 34.80, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "300 x 90 PFC", type: "PFC", h: 300.0, b: 90.0, tw: 8.0, tf: 15.5, mass: 41.40, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+
+        // ANGLES
+        { name: "25 x 25 x 3 Angle", type: "ANGLE", h: 25.0, b: 25.0, tw: 3.0, tf: null, mass: 1.12, lengths: ["6.0m"] },
+        { name: "25 x 25 x 5 Angle", type: "ANGLE", h: 25.0, b: 25.0, tw: 5.0, tf: null, mass: 1.77, lengths: ["6.0m"] },
+        { name: "30 x 30 x 3 Angle", type: "ANGLE", h: 30.0, b: 30.0, tw: 3.0, tf: null, mass: 1.36, lengths: ["6.0m"] },
+        { name: "30 x 30 x 5 Angle", type: "ANGLE", h: 30.0, b: 30.0, tw: 5.0, tf: null, mass: 2.18, lengths: ["6.0m"] },
+        { name: "40 x 40 x 3 Angle", type: "ANGLE", h: 40.0, b: 40.0, tw: 3.0, tf: null, mass: 1.83, lengths: ["6.0m"] },
+        { name: "40 x 40 x 5 Angle", type: "ANGLE", h: 40.0, b: 40.0, tw: 5.0, tf: null, mass: 2.97, lengths: ["6.0m", "12.0m"] },
+        { name: "50 x 50 x 5 Angle", type: "ANGLE", h: 50.0, b: 50.0, tw: 5.0, tf: null, mass: 3.77, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "50 x 50 x 6 Angle", type: "ANGLE", h: 50.0, b: 50.0, tw: 6.0, tf: null, mass: 4.47, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "60 x 60 x 6 Angle", type: "ANGLE", h: 60.0, b: 60.0, tw: 6.0, tf: null, mass: 5.42, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "75 x 75 x 6 Angle", type: "ANGLE", h: 75.0, b: 75.0, tw: 6.0, tf: null, mass: 6.85, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "75 x 75 x 8 Angle", type: "ANGLE", h: 75.0, b: 75.0, tw: 8.0, tf: null, mass: 8.99, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "90 x 90 x 8 Angle", type: "ANGLE", h: 90.0, b: 90.0, tw: 8.0, tf: null, mass: 10.90, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "100 x 100 x 8 Angle", type: "ANGLE", h: 100.0, b: 100.0, tw: 8.0, tf: null, mass: 12.20, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "100 x 100 x 10 Angle", type: "ANGLE", h: 100.0, b: 100.0, tw: 10.0, tf: null, mass: 15.00, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "120 x 120 x 10 Angle", type: "ANGLE", h: 120.0, b: 120.0, tw: 10.0, tf: null, mass: 18.20, lengths: ["9.0m", "12.0m", "13.0m"] },
+        { name: "150 x 150 x 12 Angle", type: "ANGLE", h: 150.0, b: 150.0, tw: 12.0, tf: null, mass: 27.30, lengths: ["9.0m", "12.0m", "13.0m"] },
+        { name: "200 x 200 x 16 Angle", type: "ANGLE", h: 200.0, b: 200.0, tw: 16.0, tf: null, mass: 48.50, lengths: ["12.0m", "13.0m"] },
+        { name: "65 x 50 x 6 Unequal", type: "ANGLE", h: 65.0, b: 50.0, tw: 6.0, tf: null, mass: 5.16, lengths: ["6.0m", "12.0m"] },
+        { name: "100 x 75 x 8 Unequal", type: "ANGLE", h: 100.0, b: 75.0, tw: 8.0, tf: null, mass: 10.60, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "125 x 75 x 8 Unequal", type: "ANGLE", h: 125.0, b: 75.0, tw: 8.0, tf: null, mass: 12.20, lengths: ["9.0m", "12.0m"] },
+        { name: "150 x 90 x 10 Unequal", type: "ANGLE", h: 150.0, b: 90.0, tw: 10.0, tf: null, mass: 18.20, lengths: ["9.0m", "12.0m", "13.0m"] }
+    ],
+    pipes: [
+        // SHS
+        { name: "19 x 19 x 1.6 SHS", cls: "SHS", dimA: 19.0, dimB: 19.0, wt: 1.6, mass: 0.86, lengths: ["6.0m"] },
+        { name: "25 x 25 x 1.6 SHS", cls: "SHS", dimA: 25.0, dimB: 25.0, wt: 1.6, mass: 1.16, lengths: ["6.0m"] },
+        { name: "25 x 25 x 2.0 SHS", cls: "SHS", dimA: 25.0, dimB: 25.0, wt: 2.0, mass: 1.41, lengths: ["6.0m"] },
+        { name: "32 x 32 x 2.0 SHS", cls: "SHS", dimA: 32.0, dimB: 32.0, wt: 2.0, mass: 1.85, lengths: ["6.0m"] },
+        { name: "38 x 38 x 2.0 SHS", cls: "SHS", dimA: 38.0, dimB: 38.0, wt: 2.0, mass: 2.25, lengths: ["6.0m"] },
+        { name: "38 x 38 x 2.5 SHS", cls: "SHS", dimA: 38.0, dimB: 38.0, wt: 2.5, mass: 2.76, lengths: ["6.0m"] },
+        { name: "50 x 50 x 2.0 SHS", cls: "SHS", dimA: 50.0, dimB: 50.0, wt: 2.0, mass: 2.99, lengths: ["6.0m", "12.0m"] },
+        { name: "50 x 50 x 3.0 SHS", cls: "SHS", dimA: 50.0, dimB: 50.0, wt: 3.0, mass: 4.28, lengths: ["6.0m", "12.0m"] },
+        { name: "50 x 50 x 4.0 SHS", cls: "SHS", dimA: 50.0, dimB: 50.0, wt: 4.0, mass: 5.48, lengths: ["6.0m", "12.0m"] },
+        { name: "60 x 60 x 3.0 SHS", cls: "SHS", dimA: 60.0, dimB: 60.0, wt: 3.0, mass: 5.22, lengths: ["6.0m", "12.0m"] },
+        { name: "60 x 60 x 4.0 SHS", cls: "SHS", dimA: 60.0, dimB: 60.0, wt: 4.0, mass: 6.73, lengths: ["6.0m", "12.0m"] },
+        { name: "76 x 76 x 3.0 SHS", cls: "SHS", dimA: 76.2, dimB: 76.2, wt: 3.0, mass: 6.75, lengths: ["6.0m", "12.0m"] },
+        { name: "76 x 76 x 4.0 SHS", cls: "SHS", dimA: 76.2, dimB: 76.2, wt: 4.0, mass: 8.77, lengths: ["6.0m", "12.0m"] },
+        { name: "90 x 90 x 3.0 SHS", cls: "SHS", dimA: 90.0, dimB: 90.0, wt: 3.0, mass: 8.05, lengths: ["6.0m", "12.0m"] },
+        { name: "90 x 90 x 4.0 SHS", cls: "SHS", dimA: 90.0, dimB: 90.0, wt: 4.0, mass: 10.50, lengths: ["6.0m", "12.0m"] },
+        { name: "100 x 100 x 3.0 SHS", cls: "SHS", dimA: 100.0, dimB: 100.0, wt: 3.0, mass: 8.99, lengths: ["6.0m", "12.0m"] },
+        { name: "100 x 100 x 4.0 SHS", cls: "SHS", dimA: 100.0, dimB: 100.0, wt: 4.0, mass: 11.70, lengths: ["6.0m", "12.0m"] },
+        { name: "100 x 100 x 6.0 SHS", cls: "SHS", dimA: 100.0, dimB: 100.0, wt: 6.0, mass: 17.00, lengths: ["6.0m", "12.0m"] },
+        { name: "120 x 120 x 5.0 SHS", cls: "SHS", dimA: 120.0, dimB: 120.0, wt: 5.0, mass: 17.60, lengths: ["6.0m", "12.0m", "13.0m"] },
+        { name: "150 x 150 x 5.0 SHS", cls: "SHS", dimA: 150.0, dimB: 150.0, wt: 5.0, mass: 22.30, lengths: ["6.0m", "12.0m", "13.0m"] },
+        { name: "150 x 150 x 6.0 SHS", cls: "SHS", dimA: 150.0, dimB: 150.0, wt: 6.0, mass: 26.40, lengths: ["6.0m", "12.0m", "13.0m"] },
+        { name: "200 x 200 x 6.0 SHS", cls: "SHS", dimA: 200.0, dimB: 200.0, wt: 6.0, mass: 35.80, lengths: ["6.0m", "12.0m", "13.0m"] },
+
+        // RHS
+        { name: "38 x 25 x 2.0 RHS", cls: "RHS", dimA: 38.0, dimB: 25.0, wt: 2.0, mass: 1.83, lengths: ["6.0m"] },
+        { name: "50 x 25 x 2.0 RHS", cls: "RHS", dimA: 50.0, dimB: 25.0, wt: 2.0, mass: 2.21, lengths: ["6.0m"] },
+        { name: "50 x 38 x 3.0 RHS", cls: "RHS", dimA: 50.0, dimB: 38.0, wt: 3.0, mass: 3.71, lengths: ["6.0m"] },
+        { name: "76 x 38 x 2.0 RHS", cls: "RHS", dimA: 76.2, dimB: 38.1, wt: 2.0, mass: 3.42, lengths: ["6.0m", "12.0m"] },
+        { name: "76 x 38 x 3.0 RHS", cls: "RHS", dimA: 76.2, dimB: 38.1, wt: 3.0, mass: 4.90, lengths: ["6.0m", "12.0m"] },
+        { name: "76 x 38 x 4.0 RHS", cls: "RHS", dimA: 76.2, dimB: 38.1, wt: 4.0, mass: 6.25, lengths: ["6.0m", "12.0m"] },
+        { name: "100 x 50 x 3.0 RHS", cls: "RHS", dimA: 100.0, dimB: 50.0, wt: 3.0, mass: 6.64, lengths: ["6.0m", "12.0m"] },
+        { name: "100 x 50 x 4.0 RHS", cls: "RHS", dimA: 100.0, dimB: 50.0, wt: 4.0, mass: 8.59, lengths: ["6.0m", "12.0m"] },
+        { name: "120 x 60 x 4.0 RHS", cls: "RHS", dimA: 120.0, dimB: 60.0, wt: 4.0, mass: 10.50, lengths: ["6.0m", "12.0m"] },
+        { name: "150 x 75 x 5.0 RHS", cls: "RHS", dimA: 150.0, dimB: 75.0, wt: 5.0, mass: 16.40, lengths: ["6.0m", "12.0m"] },
+        { name: "200 x 100 x 5.0 RHS", cls: "RHS", dimA: 200.0, dimB: 100.0, wt: 5.0, mass: 22.30, lengths: ["6.0m", "12.0m", "13.0m"] },
+
+        // PIPES
+        { name: "15 NB Pipe (21.3 OD x 2.65 Med)", cls: "PIPE", dimA: 21.3, dimB: null, wt: 2.65, mass: 1.22, lengths: ["6.0m"] },
+        { name: "20 NB Pipe (26.9 OD x 2.65 Med)", cls: "PIPE", dimA: 26.9, dimB: null, wt: 2.65, mass: 1.58, lengths: ["6.0m"] },
+        { name: "25 NB Pipe (33.7 OD x 3.25 Med)", cls: "PIPE", dimA: 33.7, dimB: null, wt: 3.25, mass: 2.44, lengths: ["6.0m"] },
+        { name: "32 NB Pipe (42.4 OD x 3.25 Med)", cls: "PIPE", dimA: 42.4, dimB: null, wt: 3.25, mass: 3.14, lengths: ["6.0m"] },
+        { name: "40 NB Pipe (48.3 OD x 3.25 Med)", cls: "PIPE", dimA: 48.3, dimB: null, wt: 3.25, mass: 3.61, lengths: ["6.0m"] },
+        { name: "50 NB Pipe (60.3 OD x 3.65 Med)", cls: "PIPE", dimA: 60.3, dimB: null, wt: 3.65, mass: 5.10, lengths: ["6.0m"] },
+        { name: "65 NB Pipe (76.1 OD x 3.65 Med)", cls: "PIPE", dimA: 76.1, dimB: null, wt: 3.65, mass: 6.51, lengths: ["6.0m"] },
+        { name: "80 NB Pipe (88.9 OD x 4.05 Med)", cls: "PIPE", dimA: 88.9, dimB: null, wt: 4.05, mass: 8.47, lengths: ["6.0m", "12.0m"] },
+        { name: "100 NB Pipe (114.3 OD x 4.5 Heavy)", cls: "PIPE", dimA: 114.3, dimB: null, wt: 4.50, mass: 12.20, lengths: ["6.0m", "12.0m"] },
+        { name: "150 NB Pipe (165.1 OD x 4.85 Heavy)", cls: "PIPE", dimA: 165.1, dimB: null, wt: 4.85, mass: 19.20, lengths: ["6.0m", "12.0m"] },
+        { name: "200 NB Pipe (219.1 OD x 6.35 Sch 20)", cls: "PIPE", dimA: 219.1, dimB: null, wt: 6.35, mass: 33.30, lengths: ["6.0m", "12.0m"] }
+    ],
+  plates: [
+        // S275JR STRUCTURAL PLATES & SHEETS
+        { grade: "S275JR Sheet", thk: 1.6, mass: 12.56, dimensions: ["1220 x 2440", "1500 x 3000"] },
+        { grade: "S275JR Sheet", thk: 2.0, mass: 15.70, dimensions: ["1220 x 2440", "1500 x 3000"] },
+        { grade: "S275JR Plate", thk: 3.0, mass: 23.55, dimensions: ["1220 x 2440", "1500 x 3000", "1500 x 6000"] },
+        { grade: "S275JR Plate", thk: 4.5, mass: 35.33, dimensions: ["1500 x 3000", "1500 x 6000", "2000 x 6000"] },
+        { grade: "S275JR Plate", thk: 6.0, mass: 47.10, dimensions: ["1500 x 3000", "1500 x 6000", "2000 x 6000"] },
+        { grade: "S275JR Plate", thk: 8.0, mass: 62.80, dimensions: ["1500 x 3000", "1500 x 6000", "2000 x 6000"] },
+        { grade: "S275JR Plate", thk: 10.0, mass: 78.50, dimensions: ["1500 x 6000", "2000 x 6000"] },
+        { grade: "S275JR Plate", thk: 12.0, mass: 94.20, dimensions: ["1500 x 6000", "2000 x 6000"] },
+
+        // S355J2+N HIGH YIELD STRUCTURAL PLATES
+        { grade: "S355J2+N Plate", thk: 6.0, mass: 47.10, dimensions: ["1500 x 6000", "2000 x 6000", "2500 x 6000"] },
+        { grade: "S355J2+N Plate", thk: 8.0, mass: 62.80, dimensions: ["1500 x 6000", "2000 x 6000", "2500 x 6000"] },
+        { grade: "S355J2+N Plate", thk: 10.0, mass: 78.50, dimensions: ["1500 x 6000", "2000 x 6000", "2500 x 12000"] },
+        { grade: "S355J2+N Plate", thk: 12.0, mass: 94.20, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
+        { grade: "S355J2+N Plate", thk: 16.0, mass: 125.60, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
+        { grade: "S355J2+N Plate", thk: 20.0, mass: 157.00, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
+        { grade: "S355J2+N Plate", thk: 25.0, mass: 196.25, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
+        { grade: "S355J2+N Plate", thk: 32.0, mass: 251.20, dimensions: ["2000 x 6000", "2500 x 6000"] },
+        { grade: "S355J2+N Plate", thk: 40.0, mass: 314.00, dimensions: ["2000 x 6000", "2500 x 6000"] },
+        { grade: "S355J2+N Plate", thk: 50.0, mass: 392.50, dimensions: ["2000 x 6000", "2500 x 6000"] },
+
+        // A516 GRADE 70 BOILER PLATES
+        { grade: "A516 Gr 70 Boiler", thk: 6.0, mass: 47.10, dimensions: ["2000 x 6000", "2500 x 6000"] },
+        { grade: "A516 Gr 70 Boiler", thk: 8.0, mass: 62.80, dimensions: ["2000 x 6000", "2500 x 6000"] },
+        { grade: "A516 Gr 70 Boiler", thk: 10.0, mass: 78.50, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
+        { grade: "A516 Gr 70 Boiler", thk: 12.0, mass: 94.20, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
+        { grade: "A516 Gr 70 Boiler", thk: 16.0, mass: 125.60, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
+        { grade: "A516 Gr 70 Boiler", thk: 20.0, mass: 157.00, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
+
+        // 3CR12 & STAINLESS STEEL PLATES
+        { grade: "3CR12 Stainless", thk: 3.0, mass: 23.55, dimensions: ["1220 x 2440", "1500 x 3000", "1500 x 6000"] },
+        { grade: "3CR12 Stainless", thk: 4.5, mass: 35.33, dimensions: ["1220 x 2440", "1500 x 3000", "1500 x 6000"] },
+        { grade: "3CR12 Stainless", thk: 6.0, mass: 47.10, dimensions: ["1500 x 3000", "1500 x 6000", "2000 x 6000"] },
+        { grade: "304L Stainless", thk: 2.0, mass: 16.00, dimensions: ["1220 x 2440", "1500 x 3000"] },
+        { grade: "304L Stainless", thk: 3.0, mass: 24.00, dimensions: ["1220 x 2440", "1500 x 3000", "1500 x 6000"] },
+        { grade: "304L Stainless", thk: 6.0, mass: 48.00, dimensions: ["1500 x 3000", "1500 x 6000", "2000 x 6000"] },
+        { grade: "316L Stainless", thk: 3.0, mass: 24.00, dimensions: ["1220 x 2440", "1500 x 3000", "1500 x 6000"] },
+        { grade: "316L Stainless", thk: 6.0, mass: 48.00, dimensions: ["1500 x 3000", "1500 x 6000", "2000 x 6000"] }
+    ],
+    special: [
+        // VRN WEAR PLATES
+        { name: "VRN 400 Wear Plate", family: "VRN", category: "Quenched & Tempered Wear Plate", hardness: "360 - 420 HB", forms: ["1500 x 6000", "2000 x 6000", "2500 x 6000 (6mm to 60mm)"] },
+        { name: "VRN 450 Wear Plate", family: "VRN", category: "Quenched & Tempered Wear Plate", hardness: "420 - 480 HB", forms: ["1500 x 6000", "2000 x 6000", "2500 x 6000 (6mm to 50mm)"] },
+        { name: "VRN 500 Wear Plate", family: "VRN", category: "Extreme Impact & Wear Plate", hardness: "470 - 530 HB", forms: ["1500 x 6000", "2000 x 6000 (6mm to 40mm)"] },
+        { name: "VRN 600 Overlay Plate", family: "VRN", category: "Chromium Carbide Overlay Plate", hardness: "550 HB min (Overlay)", forms: ["1500 x 3000", "2000 x 3000 (4 on 6 to 10 on 10)"] },
+        { name: "Creusabro 8000", family: "VRN", category: "High-Performance TRIP Steel Plate", hardness: "430 - 550 HB (Work Hardens)", forms: ["1500 x 6000", "2000 x 6000", "2500 x 6000 (6mm to 50mm)"] },
+
+        // CARBON & ALLOY ENGINEERING STEEL BARS
+        { name: "070M20 (EN 3A)", family: "EN", category: "Low Carbon Steel (BLACK)", hardness: "430 MPa min UTS", forms: ["6.0m Rounds (16mm - 250mm)", "Flats & Squares"] },
+        { name: "080M40 (EN 8)", family: "EN", category: "Medium Carbon Steel (GREEN)", hardness: "550 MPa min UTS", forms: ["6.0m Rounds (16mm - 300mm)", "Forged Shafts to 500mm"] },
+        { name: "070M55 (EN 9)", family: "EN", category: "High Carbon Steel (YELLOW)", hardness: "700 MPa min UTS", forms: ["6.0m Rounds (20mm - 200mm)", "Heavy Flat Bar / Plates"] },
+        { name: "150M19 (EN 14B)", family: "EN", category: "Carbon-Mn High Ductility (WHITE/GREEN/RED)", hardness: "540 MPa min UTS", forms: ["6.0m Rounds (25mm - 250mm)"] },
+        { name: "709M40 (EN 19)", family: "EN", category: "1% Cr-Mo High Tensile Alloy (BROWN/BLUE)", hardness: "850 - 1000 MPa UTS (Cond T)", forms: ["6.0m Rounds (20mm - 300mm)"] },
+        { name: "817M40 (EN 24)", family: "EN", category: "1.5% Ni-Cr-Mo High Tensile (RED/BLUE)", hardness: "850 - 1000 MPa UTS (Cond T)", forms: ["6.0m Rounds (25mm - 350mm)"] },
+        { name: "826M40 (EN 26)", family: "EN", category: "2.5% Ni-Cr-Mo Heavy Duty Alloy (BLACK/RED)", hardness: "1000 - 1150 MPa UTS (Cond V)", forms: ["6.0m Rounds (50mm - 300mm)"] },
+        { name: "835M30 (EN 30B)", family: "EN", category: "4.0% Ni Air Hardening Alloy (PINK)", hardness: "1550 MPa min UTS (Cond Z)", forms: ["6.0m Rounds (30mm - 200mm)"] },
+        { name: "655M13 (EN 36B)", family: "EN", category: "3.25% Ni Carburizing Case Steel (BLUE)", hardness: "1000 MPa UTS (Hardened)", forms: ["6.0m Rounds (20mm - 250mm)"] },
+
+        // BRIGHT BARS & HOLLOW BAR
+        { name: "SAE 1018 Bright Bar", family: "BRIGHT", category: "Cold Drawn Low Carbon Bright (RED)", hardness: "560 - 620 MPa UTS", forms: ["3.0m / 6.0m Bright Rounds, Hex & Squares"] },
+        { name: "230M07 (EN 1A) Bright", family: "BRIGHT", category: "High Sulfur Free-Cutting Steel (BLUE)", hardness: "460 - 550 MPa UTS", forms: ["3.0m / 6.0m High-Speed Precision Repetition Bar"] },
+        { name: "SAE 12L14 Bright", family: "BRIGHT", category: "Leaded Free-Cutting Steel (MAGENTA)", hardness: "500 - 600 MPa UTS", forms: ["3.0m / 6.0m Precision Hex & Round"] },
+        { name: "St 52.0 Hollow Bar", family: "HOLLOW", category: "DIN 1629 Seamless Machining Tube (ORANGE)", hardness: "335 - 355 MPa Yield Strength", forms: ["32mm OD x 16mm ID up to 250mm OD"] }
+    ]
+};
