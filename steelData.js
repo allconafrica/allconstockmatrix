@@ -1,6 +1,6 @@
 const steelData = {
     structural: [
-        // IPE & IPE AA
+        // IPE & IPE AA PROFILES
         { name: "IPE 100 AA", type: "IPE", h: 97.6, b: 55.0, tw: 3.6, tf: 4.5, mass: 6.72, lengths: ["6.0m", "9.0m", "12.0m"] },
         { name: "IPE 100", type: "IPE", h: 100.0, b: 55.0, tw: 4.1, tf: 5.7, mass: 8.10, lengths: ["6.0m", "9.0m", "12.0m"] },
         { name: "IPE 120 AA", type: "IPE", h: 117.0, b: 64.0, tw: 3.8, tf: 4.8, mass: 8.36, lengths: ["6.0m", "9.0m", "12.0m"] },
@@ -19,10 +19,14 @@ const steelData = {
         { name: "203 x 133 x 30 UB", type: "UB", h: 206.8, b: 133.9, tw: 6.4, tf: 9.6, mass: 30.00, lengths: ["9.0m", "11.0m", "12.0m", "13.0m"] },
         { name: "254 x 146 x 31 UB", type: "UB", h: 251.4, b: 146.1, tw: 6.0, tf: 8.6, mass: 31.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "254 x 146 x 37 UB", type: "UB", h: 256.0, b: 146.4, tw: 6.3, tf: 10.9, mass: 37.00, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "254 x 146 x 43 UB", type: "UB", h: 259.6, b: 147.3, tw: 7.3, tf: 12.7, mass: 43.20, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "305 x 165 x 40 UB", type: "UB", h: 303.4, b: 165.7, tw: 6.0, tf: 10.2, mass: 40.30, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "305 x 165 x 46 UB", type: "UB", h: 306.6, b: 165.7, tw: 6.7, tf: 11.8, mass: 46.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "305 x 165 x 54 UB", type: "UB", h: 310.9, b: 166.8, tw: 7.7, tf: 13.7, mass: 53.50, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "356 x 171 x 45 UB", type: "UB", h: 351.4, b: 171.1, tw: 7.0, tf: 9.7, mass: 45.00, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "356 x 171 x 51 UB", type: "UB", h: 355.6, b: 171.5, tw: 7.3, tf: 11.5, mass: 50.70, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "356 x 171 x 57 UB", type: "UB", h: 358.0, b: 172.2, tw: 8.1, tf: 13.0, mass: 57.00, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "356 x 171 x 67 UB", type: "UB", h: 364.0, b: 173.2, tw: 9.1, tf: 15.7, mass: 67.20, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "406 x 178 x 54 UB", type: "UB", h: 402.6, b: 177.7, tw: 7.7, tf: 10.9, mass: 54.10, lengths: ["12.0m", "13.0m", "15.0m", "18.0m"] },
         { name: "406 x 178 x 67 UB", type: "UB", h: 409.4, b: 178.8, tw: 8.8, tf: 14.3, mass: 67.10, lengths: ["12.0m", "13.0m", "15.0m", "18.0m"] },
         { name: "457 x 191 x 67 UB", type: "UB", h: 453.4, b: 189.9, tw: 8.5, tf: 12.7, mass: 67.10, lengths: ["12.0m", "13.0m", "15.0m", "18.0m"] },
@@ -33,17 +37,21 @@ const steelData = {
         { name: "152 x 152 x 30 UC", type: "UC", h: 157.6, b: 152.9, tw: 6.5, tf: 9.4, mass: 30.00, lengths: ["9.0m", "11.0m", "12.0m", "13.0m"] },
         { name: "152 x 152 x 37 UC", type: "UC", h: 161.8, b: 154.4, tw: 8.0, tf: 11.5, mass: 37.00, lengths: ["9.0m", "11.0m", "12.0m", "13.0m"] },
         { name: "203 x 203 x 46 UC", type: "UC", h: 203.2, b: 203.6, tw: 7.2, tf: 11.0, mass: 46.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "203 x 203 x 52 UC", type: "UC", h: 206.2, b: 203.9, tw: 8.0, tf: 12.5, mass: 52.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "203 x 203 x 60 UC", type: "UC", h: 209.6, b: 205.8, tw: 9.4, tf: 14.2, mass: 60.00, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "254 x 254 x 73 UC", type: "UC", h: 254.1, b: 254.6, tw: 8.6, tf: 14.2, mass: 73.10, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "254 x 254 x 89 UC", type: "UC", h: 260.3, b: 256.3, tw: 10.3, tf: 17.3, mass: 88.90, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "305 x 305 x 97 UC", type: "UC", h: 307.8, b: 304.8, tw: 9.9, tf: 15.4, mass: 96.80, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
 
         // PARALLEL FLANGE CHANNELS (PFC)
         { name: "100 x 50 PFC", type: "PFC", h: 100.0, b: 50.0, tw: 5.0, tf: 8.5, mass: 10.20, lengths: ["6.0m", "9.0m", "12.0m"] },
         { name: "125 x 65 PFC", type: "PFC", h: 125.0, b: 65.0, tw: 5.5, tf: 9.5, mass: 13.40, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
         { name: "150 x 75 PFC", type: "PFC", h: 150.0, b: 75.0, tw: 5.5, tf: 10.0, mass: 17.90, lengths: ["9.0m", "12.0m", "13.0m"] },
+        { name: "180 x 70 PFC", type: "PFC", h: 180.0, b: 70.0, tw: 7.0, tf: 10.9, mass: 21.10, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
         { name: "180 x 75 PFC", type: "PFC", h: 180.0, b: 75.0, tw: 6.0, tf: 10.5, mass: 20.30, lengths: ["9.0m", "12.0m", "13.0m"] },
         { name: "200 x 75 PFC", type: "PFC", h: 200.0, b: 75.0, tw: 6.0, tf: 11.5, mass: 23.40, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "230 x 75 PFC", type: "PFC", h: 230.0, b: 75.0, tw: 6.5, tf: 12.0, mass: 25.70, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
+        { name: "260 x 75 PFC", type: "PFC", h: 260.0, b: 75.0, tw: 7.0, tf: 12.0, mass: 27.60, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
         { name: "260 x 90 PFC", type: "PFC", h: 260.0, b: 90.0, tw: 7.0, tf: 14.0, mass: 34.80, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
         { name: "300 x 90 PFC", type: "PFC", h: 300.0, b: 90.0, tw: 8.0, tf: 15.5, mass: 41.40, lengths: ["9.0m", "12.0m", "13.0m", "15.0m"] },
 
@@ -59,9 +67,11 @@ const steelData = {
         { name: "60 x 60 x 6 Angle", type: "ANGLE", h: 60.0, b: 60.0, tw: 6.0, tf: null, mass: 5.42, lengths: ["6.0m", "9.0m", "12.0m"] },
         { name: "75 x 75 x 6 Angle", type: "ANGLE", h: 75.0, b: 75.0, tw: 6.0, tf: null, mass: 6.85, lengths: ["6.0m", "9.0m", "12.0m"] },
         { name: "75 x 75 x 8 Angle", type: "ANGLE", h: 75.0, b: 75.0, tw: 8.0, tf: null, mass: 8.99, lengths: ["6.0m", "9.0m", "12.0m"] },
+        { name: "80 x 80 x 8 Angle", type: "ANGLE", h: 80.0, b: 80.0, tw: 8.0, tf: null, mass: 9.63, lengths: ["6.0m", "9.0m", "12.0m"] },
         { name: "90 x 90 x 8 Angle", type: "ANGLE", h: 90.0, b: 90.0, tw: 8.0, tf: null, mass: 10.90, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
         { name: "100 x 100 x 8 Angle", type: "ANGLE", h: 100.0, b: 100.0, tw: 8.0, tf: null, mass: 12.20, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
         { name: "100 x 100 x 10 Angle", type: "ANGLE", h: 100.0, b: 100.0, tw: 10.0, tf: null, mass: 15.00, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
+        { name: "120 x 120 x 8 Angle", type: "ANGLE", h: 120.0, b: 120.0, tw: 8.0, tf: null, mass: 14.70, lengths: ["6.0m", "9.0m", "12.0m", "13.0m"] },
         { name: "120 x 120 x 10 Angle", type: "ANGLE", h: 120.0, b: 120.0, tw: 10.0, tf: null, mass: 18.20, lengths: ["9.0m", "12.0m", "13.0m"] },
         { name: "150 x 150 x 12 Angle", type: "ANGLE", h: 150.0, b: 150.0, tw: 12.0, tf: null, mass: 27.30, lengths: ["9.0m", "12.0m", "13.0m"] },
         { name: "200 x 200 x 16 Angle", type: "ANGLE", h: 200.0, b: 200.0, tw: 16.0, tf: null, mass: 48.50, lengths: ["12.0m", "13.0m"] },
@@ -108,7 +118,7 @@ const steelData = {
         { name: "150 x 75 x 5.0 RHS", cls: "RHS", dimA: 150.0, dimB: 75.0, wt: 5.0, mass: 16.40, lengths: ["6.0m", "12.0m"] },
         { name: "200 x 100 x 5.0 RHS", cls: "RHS", dimA: 200.0, dimB: 100.0, wt: 5.0, mass: 22.30, lengths: ["6.0m", "12.0m", "13.0m"] },
 
-        // SCHEDULE 10 LINE PIPES (LIGHT WALL STAINLESS / PROCESS)
+        // SCHEDULE 10 LINE PIPES
         { name: "15 NB Pipe (21.3 OD x 2.11 WT - Sch 10S)", cls: "PIPE", dimA: 21.3, dimB: null, wt: 2.11, mass: 1.00, lengths: ["6.0m"] },
         { name: "20 NB Pipe (26.7 OD x 2.11 WT - Sch 10S)", cls: "PIPE", dimA: 26.7, dimB: null, wt: 2.11, mass: 1.29, lengths: ["6.0m"] },
         { name: "25 NB Pipe (33.4 OD x 2.77 WT - Sch 10S)", cls: "PIPE", dimA: 33.4, dimB: null, wt: 2.77, mass: 2.11, lengths: ["6.0m"] },
@@ -121,7 +131,7 @@ const steelData = {
         { name: "150 NB Pipe (168.3 OD x 3.40 WT - Sch 10S)", cls: "PIPE", dimA: 168.3, dimB: null, wt: 3.40, mass: 13.91, lengths: ["6.0m", "12.0m"] },
         { name: "200 NB Pipe (219.1 OD x 3.76 WT - Sch 10S)", cls: "PIPE", dimA: 219.1, dimB: null, wt: 3.76, mass: 20.10, lengths: ["6.0m", "12.0m"] },
 
-        // SCHEDULE 40 LINE PIPES (STANDARD WALL)
+        // SCHEDULE 40 LINE PIPES
         { name: "15 NB Pipe (21.3 OD x 2.77 WT - Sch 40)", cls: "PIPE", dimA: 21.3, dimB: null, wt: 2.77, mass: 1.27, lengths: ["6.0m"] },
         { name: "20 NB Pipe (26.6 OD x 2.87 WT - Sch 40)", cls: "PIPE", dimA: 26.6, dimB: null, wt: 2.87, mass: 1.68, lengths: ["6.0m"] },
         { name: "25 NB Pipe (33.4 OD x 3.38 WT - Sch 40)", cls: "PIPE", dimA: 33.4, dimB: null, wt: 3.38, mass: 2.50, lengths: ["6.0m"] },
@@ -134,15 +144,14 @@ const steelData = {
         { name: "150 NB Pipe (168.2 OD x 7.11 WT - Sch 40)", cls: "PIPE", dimA: 168.2, dimB: null, wt: 7.11, mass: 28.26, lengths: ["6.0m", "12.0m"] },
         { name: "200 NB Pipe (219.1 OD x 8.18 WT - Sch 40)", cls: "PIPE", dimA: 219.1, dimB: null, wt: 8.18, mass: 42.55, lengths: ["6.0m", "12.0m"] },
 
-        // SCHEDULE 80 LINE PIPES (EXTRA HEAVY WALL)
+        // SCHEDULE 80 LINE PIPES
         { name: "25 NB Pipe (33.4 OD x 4.55 WT - Sch 80)", cls: "PIPE", dimA: 33.4, dimB: null, wt: 4.55, mass: 3.24, lengths: ["6.0m"] },
         { name: "50 NB Pipe (60.3 OD x 5.54 WT - Sch 80)", cls: "PIPE", dimA: 60.3, dimB: null, wt: 5.54, mass: 7.48, lengths: ["6.0m"] },
         { name: "80 NB Pipe (88.9 OD x 7.62 WT - Sch 80)", cls: "PIPE", dimA: 88.9, dimB: null, wt: 7.62, mass: 15.27, lengths: ["6.0m", "12.0m"] },
         { name: "100 NB Pipe (114.3 OD x 8.56 WT - Sch 80)", cls: "PIPE", dimA: 114.3, dimB: null, wt: 8.56, mass: 22.32, lengths: ["6.0m", "12.0m"] },
         { name: "150 NB Pipe (168.3 OD x 10.97 WT - Sch 80)", cls: "PIPE", dimA: 168.3, dimB: null, wt: 10.97, mass: 42.56, lengths: ["6.0m", "12.0m"] }
     ],
-    ],
-  plates: [
+    plates: [
         // S275JR STRUCTURAL PLATES & SHEETS
         { grade: "S275JR Sheet", thk: 1.6, mass: 12.56, dimensions: ["1220 x 2440", "1500 x 3000"] },
         { grade: "S275JR Sheet", thk: 2.0, mass: 15.70, dimensions: ["1220 x 2440", "1500 x 3000"] },
@@ -173,7 +182,7 @@ const steelData = {
         { grade: "A516 Gr 70 Boiler", thk: 16.0, mass: 125.60, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
         { grade: "A516 Gr 70 Boiler", thk: 20.0, mass: 157.00, dimensions: ["2000 x 6000", "2500 x 6000", "2500 x 12000"] },
 
-        // 3CR12 & STAINLESS STEEL PLATES
+        // STAINLESS STEEL & 3CR12 PLATES
         { grade: "3CR12 Stainless", thk: 3.0, mass: 23.55, dimensions: ["1220 x 2440", "1500 x 3000", "1500 x 6000"] },
         { grade: "3CR12 Stainless", thk: 4.5, mass: 35.33, dimensions: ["1220 x 2440", "1500 x 3000", "1500 x 6000"] },
         { grade: "3CR12 Stainless", thk: 6.0, mass: 47.10, dimensions: ["1500 x 3000", "1500 x 6000", "2000 x 6000"] },
@@ -191,7 +200,7 @@ const steelData = {
         { name: "VRN 600 Overlay Plate", family: "VRN", category: "Chromium Carbide Overlay Plate", hardness: "550 HB min (Overlay)", forms: ["1500 x 3000", "2000 x 3000 (4 on 6 to 10 on 10)"] },
         { name: "Creusabro 8000", family: "VRN", category: "High-Performance TRIP Steel Plate", hardness: "430 - 550 HB (Work Hardens)", forms: ["1500 x 6000", "2000 x 6000", "2500 x 6000 (6mm to 50mm)"] },
 
-        // CARBON & ALLOY ENGINEERING STEEL BARS
+        // ALLOY & CARBON ENGINEERING STEEL BARS
         { name: "070M20 (EN 3A)", family: "EN", category: "Low Carbon Steel (BLACK)", hardness: "430 MPa min UTS", forms: ["6.0m Rounds (16mm - 250mm)", "Flats & Squares"] },
         { name: "080M40 (EN 8)", family: "EN", category: "Medium Carbon Steel (GREEN)", hardness: "550 MPa min UTS", forms: ["6.0m Rounds (16mm - 300mm)", "Forged Shafts to 500mm"] },
         { name: "070M55 (EN 9)", family: "EN", category: "High Carbon Steel (YELLOW)", hardness: "700 MPa min UTS", forms: ["6.0m Rounds (20mm - 200mm)", "Heavy Flat Bar / Plates"] },
@@ -202,7 +211,7 @@ const steelData = {
         { name: "835M30 (EN 30B)", family: "EN", category: "4.0% Ni Air Hardening Alloy (PINK)", hardness: "1550 MPa min UTS (Cond Z)", forms: ["6.0m Rounds (30mm - 200mm)"] },
         { name: "655M13 (EN 36B)", family: "EN", category: "3.25% Ni Carburizing Case Steel (BLUE)", hardness: "1000 MPa UTS (Hardened)", forms: ["6.0m Rounds (20mm - 250mm)"] },
 
-        // BRIGHT BARS & HOLLOW BAR
+        // BRIGHT & HOLLOW BARS
         { name: "SAE 1018 Bright Bar", family: "BRIGHT", category: "Cold Drawn Low Carbon Bright (RED)", hardness: "560 - 620 MPa UTS", forms: ["3.0m / 6.0m Bright Rounds, Hex & Squares"] },
         { name: "230M07 (EN 1A) Bright", family: "BRIGHT", category: "High Sulfur Free-Cutting Steel (BLUE)", hardness: "460 - 550 MPa UTS", forms: ["3.0m / 6.0m High-Speed Precision Repetition Bar"] },
         { name: "SAE 12L14 Bright", family: "BRIGHT", category: "Leaded Free-Cutting Steel (MAGENTA)", hardness: "500 - 600 MPa UTS", forms: ["3.0m / 6.0m Precision Hex & Round"] },
