@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALLCON Fabrication & Engineering - Technical Reference Hub</title>
+    <title>ALLCON - Technical Reference Hub</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d9232a'/><text x='50% ' y='55%' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='45'>A</text></svg>">
     <style>
         :root {
             --obsidian-black: #0d0d0d;
@@ -55,31 +57,19 @@
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             text-decoration: none;
         }
 
-        .logo-badge {
-            background: var(--allcon-red);
-            color: white;
-            font-weight: 900;
-            font-size: 1.4rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            letter-spacing: 1.5px;
-            display: inline-block;
+        .logo-img {
+            height: 42px;
+            object-fit: contain;
+            border-radius: 2px;
         }
 
         .brand-text {
             display: flex;
             flex-direction: column;
-        }
-
-        .brand-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-light);
-            letter-spacing: 0.5px;
         }
 
         .brand-subtitle {
@@ -374,9 +364,8 @@
     <header>
         <div class="header-container">
             <a href="#" class="brand-logo">
-                <div class="logo-badge">ALLCON</div>
+                <img src="ALLCON-Logo.jpg" alt="ALLCON Fabrication & Engineering" class="logo-img">
                 <div class="brand-text">
-                    <span class="brand-title">FABRICATION & ENGINEERING</span>
                     <span class="brand-subtitle">Technical Buying Reference Hub</span>
                 </div>
             </a>
@@ -598,20 +587,20 @@
 
                 <div class="calc-box">
                     <h3>VRN Welding Preheat Calculator</h3>
-                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">EN 1011 recommended preheat guidelines for VRN plates[cite: 57].</p>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">EN 1011 recommended preheat guidelines for VRN plates.</p>
                     <div class="form-group" style="margin-bottom: 1rem;">
                         <label style="font-size: 0.8rem; color: var(--text-muted);">Combined Joint Thickness:</label>
                         <select id="weld-thick" class="filter-select" style="width:100%; margin-top: 0.3rem;" onchange="updateWeldGuide()">
-                            <option value="6">≤ 6 mm</option>[cite: 57]
-                            <option value="12">6 mm - 12 mm</option>[cite: 57]
-                            <option value="25">12 mm - 25 mm</option>[cite: 57]
-                            <option value="32">25 mm - 32 mm</option>[cite: 57]
-                            <option value="100">32 mm - 100 mm</option>[cite: 57]
+                            <option value="6">&le; 6 mm</option>
+                            <option value="12">6 mm - 12 mm</option>
+                            <option value="25">12 mm - 25 mm</option>
+                            <option value="32">25 mm - 32 mm</option>
+                            <option value="100">32 mm - 100 mm</option>
                         </select>
                     </div>
                     <div class="calc-result" id="weld-guide-output">
-                        <div>Min Preheat: 20°C</div>[cite: 57]
-                        <small style="color: var(--text-muted);">Recommended Heat Input: 0.6 - 1.4 kJ/mm</small>[cite: 57]
+                        <div>Min Preheat: 20&deg;C</div>
+                        <small style="color: var(--text-muted);">Recommended Heat Input: 0.6 - 1.4 kJ/mm</small>
                     </div>
                 </div>
             </div>
@@ -799,11 +788,11 @@
             const thick = document.getElementById('weld-thick').value;
             const out = document.getElementById('weld-guide-output');
 
-            if (thick === '6') out.innerHTML = "<div>Min Preheat: 20°C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 0.6 - 1.4 kJ/mm</small>";
-            else if (thick === '12') out.innerHTML = "<div>Min Preheat: 50°C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 1.1 - 1.9 kJ/mm</small>";
-            else if (thick === '25') out.innerHTML = "<div>Min Preheat: 100°C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 2.1 - 2.3 kJ/mm</small>";
-            else if (thick === '32') out.innerHTML = "<div>Min Preheat: 125°C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 2.3 - 2.8 kJ/mm</small>";
-            else if (thick === '100') out.innerHTML = "<div>Min Preheat: 175°C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 2.3 - 3.2 kJ/mm</small>";
+            if (thick === '6') out.innerHTML = "<div>Min Preheat: 20&deg;C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 0.6 - 1.4 kJ/mm</small>";
+            else if (thick === '12') out.innerHTML = "<div>Min Preheat: 50&deg;C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 1.1 - 1.9 kJ/mm</small>";
+            else if (thick === '25') out.innerHTML = "<div>Min Preheat: 100&deg;C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 2.1 - 2.3 kJ/mm</small>";
+            else if (thick === '32') out.innerHTML = "<div>Min Preheat: 125&deg;C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 2.3 - 2.8 kJ/mm</small>";
+            else if (thick === '100') out.innerHTML = "<div>Min Preheat: 175&deg;C</div><small style='color: var(--text-muted);'>Recommended Heat Input: 2.3 - 3.2 kJ/mm</small>";
         }
 
         window.onload = function() {
